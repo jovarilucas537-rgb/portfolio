@@ -359,6 +359,155 @@
         </section>
 
         <!-- =====================================================
+             PAGE 2: 02 // PERSONAL INFO (100VH NON-SCROLLABLE)
+             ===================================================== -->
+        <section id="page-2" class="page-view">
+            <!-- Compact Top Header -->
+            <div class="flex items-center justify-between gap-3 shrink-0 mb-3 anim-stagger-1">
+                <div>
+                    <div class="flex items-center gap-2.5 font-mono text-xs text-sky-300">
+                        <span class="px-2.5 py-0.5 rounded bg-blue-500/25 font-bold border border-sky-400/30">PAGE 02 // 04</span>
+                        <span>EXECUTIVE DOSSIER &amp; SOCIAL CONNECTIVITY</span>
+                    </div>
+                    <h2 class="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight mt-0.5">
+                        Personal Information
+                    </h2>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button type="button" onclick="switchPage(1)" class="px-3.5 py-2 rounded-xl bg-[#0C2147]/90 hover:bg-blue-600 text-sky-200 hover:text-white font-mono text-xs font-semibold transition">
+                        <i class="fa-solid fa-arrow-left mr-1"></i>01 // Home
+                    </button>
+                    <button type="button" onclick="switchPage(3)" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-mono text-xs font-bold transition shadow-md">
+                        03 // Achievements <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Info Container (Flex-1 for 100vh fit) -->
+            <div class="flex-1 min-h-0 flex flex-col gap-4 sm:gap-5 anim-stagger-2">
+
+                <!-- TOP ROW: 4 Stat Cards -->
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 shrink-0">
+                    <div class="bento-card p-4 sm:p-5 flex flex-col justify-center border-t-2 border-t-sky-400">
+                        <span class="font-mono text-[10px] sm:text-xs text-sky-300 uppercase tracking-widest mb-1 block">Full Name</span>
+                        <span class="font-display text-lg sm:text-xl font-bold text-white leading-tight">Jovari A. Lucas</span>
+                    </div>
+                    <div class="bento-card p-4 sm:p-5 flex flex-col justify-center border-t-2 border-t-emerald-400">
+                        <span class="font-mono text-[10px] sm:text-xs text-emerald-300 uppercase tracking-widest mb-1 block">Age</span>
+                        <span class="font-display text-lg sm:text-xl font-bold text-white leading-tight">19 Years Old</span>
+                    </div>
+                    <div class="bento-card p-4 sm:p-5 flex flex-col justify-center border-t-2 border-t-blue-400">
+                        <span class="font-mono text-[10px] sm:text-xs text-blue-300 uppercase tracking-widest mb-1 block">Location</span>
+                        <span class="font-display text-lg sm:text-xl font-bold text-white leading-tight">Baguio City, PH</span>
+                    </div>
+                    <div class="bento-card p-4 sm:p-5 flex flex-col justify-center border-t-2 border-t-purple-400">
+                        <span class="font-mono text-[10px] sm:text-xs text-purple-300 uppercase tracking-widest mb-1 block">Languages</span>
+                        <span class="font-display text-lg sm:text-xl font-bold text-white leading-tight">English, Tagalog, Ilocano</span>
+                    </div>
+                </div>
+
+                <!-- MIDDLE ROW: Past, Present, Future (Flex-1 to fill remaining space) -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 flex-1 min-h-0">
+                    <!-- Past -->
+                    <div class="bento-card p-5 sm:p-6 flex flex-col border-t-4 border-t-slate-400 overflow-y-auto">
+                        <div class="flex items-center gap-3 mb-3 shrink-0">
+                            <div class="w-10 h-10 rounded-lg bg-slate-500/20 text-slate-300 flex items-center justify-center">
+                                <i class="fa-solid fa-clock-rotate-left"></i>
+                            </div>
+                            <div>
+                                <span class="font-mono text-[10px] uppercase text-slate-400 font-bold tracking-widest block">TIMELINE // 01</span>
+                                <h3 class="font-display text-xl font-bold text-white">The Past</h3>
+                            </div>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-200/90 leading-relaxed">
+                            My journey began with a deep curiosity for how systems operate and communicate. Early exposure to computing ignited my passion for troubleshooting and logical problem-solving, setting the foundation for my pursuit of Information Technology.
+                        </p>
+                    </div>
+
+                    <!-- Present -->
+                    <div class="bento-card p-5 sm:p-6 flex flex-col border-t-4 border-t-sky-400 overflow-y-auto">
+                        <div class="flex items-center gap-3 mb-3 shrink-0">
+                            <div class="w-10 h-10 rounded-lg bg-blue-500/20 text-sky-400 flex items-center justify-center">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
+                            <div>
+                                <span class="font-mono text-[10px] uppercase text-sky-400 font-bold tracking-widest block">TIMELINE // 02</span>
+                                <h3 class="font-display text-xl font-bold text-white">The Present</h3>
+                            </div>
+                        </div>
+                        <p class="text-xs sm:text-sm text-blue-100/90 leading-relaxed">
+                            Currently an active scholar at the University of the Cordilleras, immersing myself in the BSIT curriculum with a specialized focus on Network and Security. I am honing my skills in digital logic, programming, and network infrastructure.
+                        </p>
+                    </div>
+
+                    <!-- Future -->
+                    <div class="bento-card p-5 sm:p-6 flex flex-col border-t-4 border-t-emerald-400 overflow-y-auto">
+                        <div class="flex items-center gap-3 mb-3 shrink-0">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+                                <i class="fa-solid fa-rocket"></i>
+                            </div>
+                            <div>
+                                <span class="font-mono text-[10px] uppercase text-emerald-400 font-bold tracking-widest block">TIMELINE // 03</span>
+                                <h3 class="font-display text-xl font-bold text-white">The Future</h3>
+                            </div>
+                        </div>
+                        <p class="text-xs sm:text-sm text-emerald-100/90 leading-relaxed">
+                            I envision becoming a highly proficient Network Security Engineer, dedicated to designing resilient enterprise architectures and safeguarding critical digital infrastructures against emerging cyber threats globally.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- BOTTOM ROW: Socials -->
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 shrink-0">
+                    <button onclick="copySocialValue('soc-fb', 'Facebook')" class="bento-card p-3 sm:p-4 flex items-center justify-between group hover:bg-[#1877F2]/10 transition-colors border-l-4 border-l-[#1877F2] text-left">
+                        <div class="flex items-center gap-3 overflow-hidden">
+                            <i class="fa-brands fa-facebook text-2xl text-[#1877F2]"></i>
+                            <div class="truncate">
+                                <span class="font-mono text-[10px] text-sky-300 block">FACEBOOK</span>
+                                <span id="soc-fb" class="font-display text-sm font-bold text-white truncate block">Jovari Lucas</span>
+                            </div>
+                        </div>
+                        <i class="fa-regular fa-copy text-sky-400/50 group-hover:text-sky-300 transition-colors"></i>
+                    </button>
+
+                    <button onclick="copySocialValue('soc-ig', 'Instagram')" class="bento-card p-3 sm:p-4 flex items-center justify-between group hover:bg-[#E4405F]/10 transition-colors border-l-4 border-l-[#E4405F] text-left">
+                        <div class="flex items-center gap-3 overflow-hidden">
+                            <i class="fa-brands fa-instagram text-2xl text-[#E4405F]"></i>
+                            <div class="truncate">
+                                <span class="font-mono text-[10px] text-sky-300 block">INSTAGRAM</span>
+                                <span id="soc-ig" class="font-display text-sm font-bold text-white truncate block">@jovari.lucas</span>
+                            </div>
+                        </div>
+                        <i class="fa-regular fa-copy text-sky-400/50 group-hover:text-sky-300 transition-colors"></i>
+                    </button>
+
+                    <button onclick="copySocialValue('soc-msg', 'Messenger')" class="bento-card p-3 sm:p-4 flex items-center justify-between group hover:bg-[#00B2FF]/10 transition-colors border-l-4 border-l-[#00B2FF] text-left">
+                        <div class="flex items-center gap-3 overflow-hidden">
+                            <i class="fa-brands fa-facebook-messenger text-2xl text-[#00B2FF]"></i>
+                            <div class="truncate">
+                                <span class="font-mono text-[10px] text-sky-300 block">MESSENGER</span>
+                                <span id="soc-msg" class="font-display text-sm font-bold text-white truncate block">m.me/jovari.lucas</span>
+                            </div>
+                        </div>
+                        <i class="fa-regular fa-copy text-sky-400/50 group-hover:text-sky-300 transition-colors"></i>
+                    </button>
+
+                    <button onclick="copySocialValue('soc-gm', 'Gmail')" class="bento-card p-3 sm:p-4 flex items-center justify-between group hover:bg-[#EA4335]/10 transition-colors border-l-4 border-l-[#EA4335] text-left">
+                        <div class="flex items-center gap-3 overflow-hidden">
+                            <i class="fa-solid fa-envelope text-2xl text-[#EA4335]"></i>
+                            <div class="truncate">
+                                <span class="font-mono text-[10px] text-sky-300 block">GMAIL</span>
+                                <span id="soc-gm" class="font-display text-sm font-bold text-white truncate block">jovari.lucas@gmail.com</span>
+                            </div>
+                        </div>
+                        <i class="fa-regular fa-copy text-sky-400/50 group-hover:text-sky-300 transition-colors"></i>
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =====================================================
              PAGE 3: 03 // ACHIEVEMENTS (100VH NON-SCROLLABLE — STRICTLY 2 MONUMENTAL BOXES: EDUCATION & ACHIEVEMENTS)
              ===================================================== -->
         <section id="page-3" class="page-view">
