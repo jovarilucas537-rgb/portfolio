@@ -347,6 +347,7 @@
     <canvas id="cyber-canvas" class="fixed inset-0 pointer-events-none" style="z-index: 1; opacity: 0.68;"></canvas>
 
     <!-- Hidden File Inputs for Portrait Photo Uploads -->
+    <input type="file" id="upload-profile" accept="image/*" class="hidden" onchange="handleProfilePhotoFile(event)">
     <input type="file" id="upload-mother" accept="image/*" class="hidden" onchange="handlePhotoFile(event, 'mother-img', 'mother-placeholder', 'netsec_photo_mother')">
     <input type="file" id="upload-father" accept="image/*" class="hidden" onchange="handlePhotoFile(event, 'father-img', 'father-placeholder', 'netsec_photo_father')">
 
@@ -420,15 +421,28 @@
                 <!-- MIDDLE AREA: Widescreen Landscape Photo Area As-Is (52vh, Studio Portrait) -->
                 <div class="w-full flex-none flex items-center justify-center overflow-hidden anim-stagger-2" style="height: 52vh;">
                     <div id="dropzone-profile"
-                         class="photo-dropzone hero-photo-frame float-slow relative rounded-3xl overflow-hidden bg-white transition-all flex items-center justify-center shadow-2xl"
+                         onclick="document.getElementById('upload-profile').click()"
+                         ondragover="handleDragOver(event, 'dropzone-profile')"
+                         ondragleave="handleDragLeave(event, 'dropzone-profile')"
+                         ondrop="handleProfileDrop(event)"
+                         title="Click or Drag & Drop your new photo here to update immediately"
+                         class="photo-dropzone hero-photo-frame float-slow relative rounded-3xl overflow-hidden bg-white cursor-pointer transition-all flex items-center justify-center shadow-2xl group"
                          style="height: 100%; border: none; background-color: #FFFFFF;">
 
                         <!-- New Studio Portrait -->
                         <img id="profile-img"
                              src="599f7112-391d-4abb-80af-c29c81f59ecb.jpg"
-                             onerror="this.onerror=null; this.src='profile.jpg';"
+                             onerror="this.onerror=null; this.src='profile.jpg?v=' + Date.now();"
                              alt="Jovari A. Lucas"
                              class="w-full h-full object-cover object-center">
+
+                        <!-- Subtle Hover Prompt to Change Photo -->
+                        <div class="absolute bottom-3 inset-x-4 opacity-0 group-hover:opacity-100 transition-opacity bg-[#061229]/90 backdrop-blur-md border border-sky-400/30 rounded-xl px-4 py-2 flex items-center justify-between shadow-lg pointer-events-none">
+                            <span class="font-mono text-xs font-semibold text-white">
+                                <i class="fa-solid fa-camera text-sky-400 mr-2"></i>Click or Drop New Photo Here
+                            </span>
+                            <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-blue-500/30 text-sky-300 font-bold">CHANGE PHOTO</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1239,6 +1253,63 @@
             }
         }
 
+        function handleProfileDrop(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const zone = document.getElementById('dropzone-profile');
+            if (zone) zone.classList.remove('drag-active');
+            const files = e.dataTransfer ? e.dataTransfer.files : null;
+            if (files && files[0]) {
+                processProfileImageFile(files[0]);
+            }
+        }
+
+        function handleProfilePhotoFile(e) {
+            const file = e.target.files ? e.target.files[0] : null;
+            if (file) {
+                processProfileImageFile(file);
+            }
+        }
+
+        function processProfileImageFile(file) {
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const maxDim = 1400;
+                    let w = img.width;
+                    let h = img.height;
+                    if (w > h && w > maxDim) {
+                        h = Math.round((h * maxDim) / w);
+                        w = maxDim;
+                    } else if (h > maxDim) {
+                        w = Math.round((w * maxDim) / h);
+                        h = maxDim;
+                    }
+                    canvas.width = w;
+                    canvas.height = h;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, w, h);
+                    const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
+
+                    const profileImg = document.getElementById('profile-img');
+                    const bgBlurImg = document.getElementById('bg-blur-img');
+                    if (profileImg) profileImg.src = dataUrl;
+                    if (bgBlurImg) bgBlurImg.src = dataUrl;
+
+                    try {
+                        localStorage.setItem('netsec_photo_profile_v2', dataUrl);
+                        showToast("Home Page photo & blurred background updated!");
+                    } catch (err) {
+                        showToast("Home Page photo updated for this session");
+                    }
+                };
+                img.src = evt.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
         function processImageFile(file, imgId, placeholderId, storageKey) {
             const reader = new FileReader();
             reader.onload = function(evt) {
@@ -1285,6 +1356,16 @@
         }
 
         function loadSavedPhotos() {
+            try {
+                const savedProfile = localStorage.getItem('netsec_photo_profile_v2');
+                if (savedProfile) {
+                    const profileImg = document.getElementById('profile-img');
+                    const bgBlurImg = document.getElementById('bg-blur-img');
+                    if (profileImg) profileImg.src = savedProfile;
+                    if (bgBlurImg) bgBlurImg.src = savedProfile;
+                }
+            } catch (e) {}
+
             const slots = [
                 { img: 'mother-img', ph: 'mother-placeholder', key: 'netsec_photo_mother', legacy: 'swiss_photo_mother' },
                 { img: 'father-img', ph: 'father-placeholder', key: 'netsec_photo_father', legacy: 'swiss_photo_father' }
