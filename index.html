@@ -333,10 +333,10 @@
 </head>
 <body class="selection:bg-blue-500 selection:text-white flex flex-col h-screen overflow-hidden text-slate-100 orientation-landscape">
 
-    <!-- Dynamic Blurred Portrait Photo Background Layer (Hardcoded to profile.jpg) -->
+    <!-- Dynamic Blurred Portrait Photo Background Layer -->
     <div id="dynamic-photo-bg" class="fixed inset-0 pointer-events-none overflow-hidden transition-opacity duration-700 opacity-100" style="z-index: 0;">
-        <img id="bg-blur-img" src="profile.jpg" alt="" class="w-full h-full object-cover" style="filter: blur(14px) brightness(0.96) saturate(1.18); transform: scale(1.06);">
-        <div class="absolute inset-0" style="background: radial-gradient(circle at center, rgba(7, 20, 44, 0.20) 0%, rgba(5, 14, 33, 0.52) 100%);"></div>
+        <img id="bg-blur-img" src="599f7112-391d-4abb-80af-c29c81f59ecb.jpg" onerror="this.onerror=null; this.src='profile.jpg';" alt="" class="w-full h-full object-cover" style="filter: blur(16px) brightness(0.85) saturate(1.12); transform: scale(1.06);">
+        <div class="absolute inset-0" style="background: radial-gradient(circle at center, rgba(7, 20, 44, 0.58) 0%, rgba(5, 14, 33, 0.82) 100%);"></div>
     </div>
 
     <!-- Ambient Atmospheric Aurora Light Orbs -->
@@ -417,45 +417,18 @@
                     </div>
                 </div>
 
-                <!-- MIDDLE AREA: Widescreen Landscape Photo Area As-Is (52vh, Pure White Background Cutout Focused on Subject) -->
+                <!-- MIDDLE AREA: Widescreen Landscape Photo Area As-Is (52vh, Studio Portrait) -->
                 <div class="w-full flex-none flex items-center justify-center overflow-hidden anim-stagger-2" style="height: 52vh;">
                     <div id="dropzone-profile"
                          class="photo-dropzone hero-photo-frame float-slow relative rounded-3xl overflow-hidden bg-white transition-all flex items-center justify-center shadow-2xl"
                          style="height: 100%; border: none; background-color: #FFFFFF;">
 
-                        <!-- Uploaded Student Portrait with Studio White Background Isolation Focused on Subject Looking at Camera -->
-                        <svg viewBox="0 0 1000 750" class="w-full h-full" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Photo of Me">
-                            <defs>
-                                <filter id="studio-soft-edge" x="-10%" y="-10%" width="120%" height="120%">
-                                    <feGaussianBlur stdDeviation="4.5" />
-                                </filter>
-                                <mask id="subject-cutout-mask">
-                                    <rect width="1000" height="750" fill="black" />
-                                    <!-- Silhouette mask aligned in native image coordinates isolating Jovari looking at the camera -->
-                                    <path d="M 425,22
-                                             C 368,22 342,60 344,125
-                                             C 345,180 352,242 365,295
-                                             C 340,315 265,338 225,368
-                                             C 195,392 182,455 172,540
-                                             C 164,605 162,655 155,685
-                                             C 138,705 125,728 118,750
-                                             L 635,750
-                                             C 622,712 595,685 568,668
-                                             C 576,585 574,495 556,415
-                                             C 544,368 512,338 478,318
-                                             C 494,272 505,205 506,140
-                                             C 508,62 478,22 425,22 Z"
-                                          fill="white"
-                                          filter="url(#studio-soft-edge)" />
-                                </mask>
-                            </defs>
-                            <!-- Pure White Studio Background -->
-                            <rect width="1000" height="750" fill="#FFFFFF" />
-                            <!-- Subject Image Centered & Masked in Matching Coordinates -->
-                            <g transform="translate(80, 0)">
-                                <image id="profile-img" href="profile.jpg" width="1000" height="750" preserveAspectRatio="none" mask="url(#subject-cutout-mask)" />
-                            </g>
-                        </svg>
+                        <!-- New Studio Portrait -->
+                        <img id="profile-img"
+                             src="599f7112-391d-4abb-80af-c29c81f59ecb.jpg"
+                             onerror="this.onerror=null; this.src='profile.jpg';"
+                             alt="Jovari A. Lucas"
+                             class="w-full h-full object-cover object-center">
                     </div>
                 </div>
             </div>
