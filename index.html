@@ -44,15 +44,15 @@
             --bg-primary: #07142C;
             --bg-gradient-top: #0F2957;
             --bg-gradient-bottom: #050E21;
-            --bg-card: rgba(12, 31, 68, 0.82);
-            --bg-subtle: rgba(17, 43, 92, 0.72);
+            --bg-card: rgba(10, 26, 58, 0.76);
+            --bg-subtle: rgba(15, 38, 82, 0.68);
             --text-primary: #F8FAFC;
             --text-secondary: #DBEAFE;
             --text-muted: #93C5FD;
-            --border-hairline: rgba(56, 189, 248, 0.22);
+            --border-hairline: rgba(56, 189, 248, 0.13);
             --accent-primary: #38BDF8;
-            --grid-line: rgba(56, 189, 248, 0.08);
-            --card-shadow: 0 18px 42px -12px rgba(2, 8, 23, 0.72);
+            --grid-line: rgba(56, 189, 248, 0.06);
+            --card-shadow: 0 20px 48px -14px rgba(2, 8, 23, 0.78);
         }
 
         /* Alternate Dark Blue Shade: Royal Cobalt Blue */
@@ -60,10 +60,10 @@
             --bg-primary: #0C224A;
             --bg-gradient-top: #163773;
             --bg-gradient-bottom: #081838;
-            --bg-card: rgba(20, 49, 104, 0.84);
-            --bg-subtle: rgba(28, 64, 130, 0.75);
-            --border-hairline: rgba(96, 165, 250, 0.28);
-            --grid-line: rgba(96, 165, 250, 0.11);
+            --bg-card: rgba(18, 44, 96, 0.78);
+            --bg-subtle: rgba(25, 58, 120, 0.70);
+            --border-hairline: rgba(96, 165, 250, 0.16);
+            --grid-line: rgba(96, 165, 250, 0.08);
         }
 
         * {
@@ -92,6 +92,40 @@
             background-size: 100% 100%, 100% 100%, 42px 42px, 42px 42px, 100% 100%;
         }
 
+        /* Ambient Aurora Atmosphere Glow */
+        .aurora-orb {
+            position: fixed;
+            border-radius: 9999px;
+            filter: blur(90px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.38;
+            animation: auroraDrift 14s ease-in-out infinite alternate;
+        }
+
+        .aurora-orb-1 {
+            width: 42vw;
+            height: 42vw;
+            top: -12vw;
+            left: -8vw;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.32) 0%, rgba(37, 99, 235, 0.08) 65%, transparent 100%);
+        }
+
+        .aurora-orb-2 {
+            width: 38vw;
+            height: 38vw;
+            bottom: -14vw;
+            right: -6vw;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.24) 0%, rgba(56, 189, 248, 0.1) 65%, transparent 100%);
+            animation-delay: -7s;
+        }
+
+        @keyframes auroraDrift {
+            0% { transform: translate3d(0, 0, 0) scale(1); }
+            50% { transform: translate3d(3vw, 2vh, 0) scale(1.08); }
+            100% { transform: translate3d(-2vw, 4vh, 0) scale(0.96); }
+        }
+
         /* Widescreen Shell */
         .widescreen-shell {
             width: 95vw;
@@ -118,26 +152,43 @@
             }
         }
 
-        /* Deep Blue Glassmorphic Architectural Bento Card with Spotlight */
+        /* Ultra-Thin Hairline Glassmorphic Bento Card with 3D Micro-Tilt & Light Sweep */
         .bento-card {
             position: relative;
             background-color: var(--bg-card);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--border-hairline);
-            border-radius: 1.35rem;
-            box-shadow: var(--card-shadow);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 0.5px solid var(--border-hairline);
+            border-radius: 1.25rem;
+            box-shadow: var(--card-shadow), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
             overflow: hidden;
-            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+            transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateZ(0);
+            transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+            will-change: transform;
         }
 
         .bento-card::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(520px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(56, 189, 248, 0.14), transparent 45%);
+            background: radial-gradient(480px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(56, 189, 248, 0.13), transparent 45%);
             opacity: 0;
             transition: opacity 0.35s ease;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Subtle Diagonal Sheen Sweep on Hover */
+        .bento-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -130%;
+            width: 65%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transform: skewX(-25deg);
+            transition: left 0.75s cubic-bezier(0.16, 1, 0.3, 1);
             pointer-events: none;
             z-index: 0;
         }
@@ -146,15 +197,32 @@
             opacity: 1;
         }
 
+        .bento-card:hover::after {
+            left: 160%;
+        }
+
         .bento-card:hover {
-            transform: translateY(-3px);
-            border-color: rgba(56, 189, 248, 0.65);
-            box-shadow: 0 22px 48px -12px rgba(14, 165, 233, 0.36);
+            border-color: rgba(56, 189, 248, 0.36);
+            box-shadow: 0 24px 52px -12px rgba(14, 165, 233, 0.28), inset 0 1px 0 0 rgba(255, 255, 255, 0.16);
         }
 
         .bento-card > * {
             position: relative;
             z-index: 1;
+        }
+
+        /* Ultra-Fine Inner Item Sub-Cards (Pages 2, 3, 4) */
+        .sub-item-card {
+            background-color: rgba(8, 23, 54, 0.72);
+            border: 0.5px solid rgba(56, 189, 248, 0.12);
+            box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.04);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .sub-item-card:hover {
+            background-color: rgba(12, 33, 74, 0.85);
+            border-color: rgba(56, 189, 248, 0.32);
+            transform: translateX(4px);
         }
 
         /* Dynamic Photo Orientation Modes (Defaults to Large Landscape 16:10) */
@@ -192,13 +260,13 @@
             height: 100% !important;
             min-height: 0 !important;
             overflow: hidden !important;
-            animation: pageReveal3D 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: pageReveal3D 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         @keyframes pageReveal3D {
             0% {
                 opacity: 0;
-                transform: perspective(1200px) translateY(20px) scale(0.985) rotateX(2deg);
+                transform: perspective(1200px) translateY(18px) scale(0.988) rotateX(1.5deg);
                 filter: blur(4px);
             }
             100% {
@@ -210,19 +278,19 @@
 
         /* Staggered Child Card Entrance Animation */
         .page-view.active .anim-stagger-1 {
-            animation: itemFloatIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+            animation: itemFloatIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.04s both;
         }
         .page-view.active .anim-stagger-2 {
-            animation: itemFloatIn 0.62s cubic-bezier(0.16, 1, 0.3, 1) 0.14s both;
+            animation: itemFloatIn 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
         }
         .page-view.active .anim-stagger-3 {
-            animation: itemFloatIn 0.68s cubic-bezier(0.16, 1, 0.3, 1) 0.22s both;
+            animation: itemFloatIn 0.72s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
         }
 
         @keyframes itemFloatIn {
             0% {
                 opacity: 0;
-                transform: translateY(22px) scale(0.975);
+                transform: translateY(20px) scale(0.98);
             }
             100% {
                 opacity: 1;
@@ -268,11 +336,15 @@
     <!-- Dynamic Blurred Portrait Photo Background Layer (Hardcoded to profile.jpg) -->
     <div id="dynamic-photo-bg" class="fixed inset-0 pointer-events-none overflow-hidden transition-opacity duration-700 opacity-100" style="z-index: 0;">
         <img id="bg-blur-img" src="profile.jpg" alt="" class="w-full h-full object-cover" style="filter: blur(14px) brightness(0.96) saturate(1.18); transform: scale(1.06);">
-        <div class="absolute inset-0" style="background: radial-gradient(circle at center, rgba(7, 20, 44, 0.20) 0%, rgba(5, 14, 33, 0.50) 100%);"></div>
+        <div class="absolute inset-0" style="background: radial-gradient(circle at center, rgba(7, 20, 44, 0.20) 0%, rgba(5, 14, 33, 0.52) 100%);"></div>
     </div>
 
-    <!-- Interactive Cyber Network Topology Particle Animation Canvas -->
-    <canvas id="cyber-canvas" class="fixed inset-0 pointer-events-none" style="z-index: 1; opacity: 0.55;"></canvas>
+    <!-- Ambient Atmospheric Aurora Light Orbs -->
+    <div class="aurora-orb aurora-orb-1"></div>
+    <div class="aurora-orb aurora-orb-2"></div>
+
+    <!-- Interactive Cyber Network Topology & Live Data Packet Canvas -->
+    <canvas id="cyber-canvas" class="fixed inset-0 pointer-events-none" style="z-index: 1; opacity: 0.68;"></canvas>
 
     <!-- Hidden File Inputs for Portrait Photo Uploads -->
     <input type="file" id="upload-mother" accept="image/*" class="hidden" onchange="handlePhotoFile(event, 'mother-img', 'mother-placeholder', 'netsec_photo_mother')">
@@ -321,10 +393,10 @@
     <main class="viewport-stage relative z-10 widescreen-shell px-2 sm:px-6">
 
         <!-- =====================================================
-             PAGE 1: 01 // HOME (100VH FIT — MONUMENTAL NAME ABOVE, LANDSCAPE PHOTO AS-IS BELOW)
+             PAGE 1: 01 // HOME (100VH FIT — MONUMENTAL NAME ABOVE, LANDSCAPE PHOTO BELOW)
              ===================================================== -->
         <section id="page-1" class="page-view active">
-            <div class="w-full h-full flex flex-col justify-center items-center text-center gap-8 pb-4">
+            <div class="w-full h-full flex flex-col justify-center items-center text-center gap-6 pb-2">
 
                 <!-- TOP AREA: Monumental Full Name & Program Above the Photo -->
                 <div class="w-full flex flex-col items-center shrink-0 anim-stagger-1" style="gap: clamp(0.2rem, 0.55vh, 0.5rem);">
@@ -345,14 +417,45 @@
                     </div>
                 </div>
 
-                <!-- MIDDLE AREA: Widescreen Landscape Photo Area As-Is (52vh, Borderless) -->
+                <!-- MIDDLE AREA: Widescreen Landscape Photo Area As-Is (52vh, Pure White Background Cutout Focused on Subject) -->
                 <div class="w-full flex-none flex items-center justify-center overflow-hidden anim-stagger-2" style="height: 52vh;">
                     <div id="dropzone-profile"
-                         class="photo-dropzone hero-photo-frame float-slow relative rounded-3xl overflow-hidden bg-[#091A3A]/75 backdrop-blur-md transition-all flex items-center justify-center shadow-2xl"
-                         style="height: 100%; border: none;">
+                         class="photo-dropzone hero-photo-frame float-slow relative rounded-3xl overflow-hidden bg-white transition-all flex items-center justify-center shadow-2xl"
+                         style="height: 100%; border: none; background-color: #FFFFFF;">
 
-                        <!-- Uploaded Student Portrait -->
-                        <img id="profile-img" src="profile.jpg" alt="Photo of Me" class="w-full h-full object-cover">
+                        <!-- Uploaded Student Portrait with Studio White Background Isolation Focused on Subject Looking at Camera -->
+                        <svg viewBox="0 0 1000 750" class="w-full h-full" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Photo of Me">
+                            <defs>
+                                <filter id="studio-soft-edge" x="-10%" y="-10%" width="120%" height="120%">
+                                    <feGaussianBlur stdDeviation="4.5" />
+                                </filter>
+                                <mask id="subject-cutout-mask">
+                                    <rect width="1000" height="750" fill="black" />
+                                    <!-- Silhouette mask aligned in native image coordinates isolating Jovari looking at the camera -->
+                                    <path d="M 425,22
+                                             C 368,22 342,60 344,125
+                                             C 345,180 352,242 365,295
+                                             C 340,315 265,338 225,368
+                                             C 195,392 182,455 172,540
+                                             C 164,605 162,655 155,685
+                                             C 138,705 125,728 118,750
+                                             L 635,750
+                                             C 622,712 595,685 568,668
+                                             C 576,585 574,495 556,415
+                                             C 544,368 512,338 478,318
+                                             C 494,272 505,205 506,140
+                                             C 508,62 478,22 425,22 Z"
+                                          fill="white"
+                                          filter="url(#studio-soft-edge)" />
+                                </mask>
+                            </defs>
+                            <!-- Pure White Studio Background -->
+                            <rect width="1000" height="750" fill="#FFFFFF" />
+                            <!-- Subject Image Centered & Masked in Matching Coordinates -->
+                            <g transform="translate(80, 0)">
+                                <image id="profile-img" href="profile.jpg" width="1000" height="750" preserveAspectRatio="none" mask="url(#subject-cutout-mask)" />
+                            </g>
+                        </svg>
                     </div>
                 </div>
             </div>
@@ -366,14 +469,14 @@
             <div class="flex items-center justify-between gap-3 shrink-0 mb-3 anim-stagger-1">
                 <div>
                     <div class="flex items-center gap-2.5 font-mono text-xs text-sky-300 mb-1">
-                        <span class="px-2.5 py-0.5 rounded bg-blue-500/25 font-bold border border-sky-400/30">PAGE 02 // 04</span>
+                        <span class="px-2.5 py-0.5 rounded bg-blue-500/20 font-bold border border-sky-400/20">PAGE 02 // 04</span>
                     </div>
                     <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-none">
                         Personal Information
                     </h2>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button type="button" onclick="switchPage(1)" class="px-3.5 py-2 rounded-xl bg-[#0C2147]/90 hover:bg-blue-600 text-sky-200 hover:text-white font-mono text-xs font-semibold transition">
+                    <button type="button" onclick="switchPage(1)" class="px-3.5 py-2 rounded-xl bg-[#0C2147]/85 hover:bg-blue-600 text-sky-200 hover:text-white font-mono text-xs font-semibold border border-sky-400/15 transition">
                         <i class="fa-solid fa-arrow-left mr-1"></i>01 // Home
                     </button>
                     <button type="button" onclick="switchPage(3)" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-mono text-xs font-bold transition shadow-md">
@@ -385,32 +488,36 @@
             <!-- Main Info Container (Flex-1 for 100vh fit) -->
             <div class="flex-1 min-h-0 flex flex-col gap-4 sm:gap-5 anim-stagger-2">
 
-                <!-- TOP ROW: 4 Stat Cards -->
-                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 shrink-0">
-                    <div class="bento-card p-4 sm:p-5 flex flex-col justify-center border-t-2 border-t-sky-400">
+                <!-- TOP ROW: 5 Sleek Hairline Stat Cards (Full Name, Birthdate, Age, Location, Languages) -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 shrink-0">
+                    <div class="bento-card p-3.5 sm:p-4 flex flex-col justify-center border-t border-t-sky-400/40">
                         <span class="font-mono text-[10px] sm:text-xs text-sky-300 uppercase tracking-widest mb-1 block">Full Name</span>
-                        <span class="font-display text-lg sm:text-xl font-bold text-white leading-tight">Jovari A. Lucas</span>
+                        <span class="font-display text-base sm:text-lg lg:text-xl font-bold text-white leading-tight">Jovari A. Lucas</span>
                     </div>
-                    <div class="bento-card p-4 sm:p-5 flex flex-col justify-center border-t-2 border-t-emerald-400">
+                    <div class="bento-card p-3.5 sm:p-4 flex flex-col justify-center border-t border-t-cyan-400/40">
+                        <span class="font-mono text-[10px] sm:text-xs text-cyan-300 uppercase tracking-widest mb-1 block">Birthdate</span>
+                        <span class="font-display text-base sm:text-lg lg:text-xl font-bold text-white leading-tight">September 17, 2007</span>
+                    </div>
+                    <div class="bento-card p-3.5 sm:p-4 flex flex-col justify-center border-t border-t-emerald-400/40">
                         <span class="font-mono text-[10px] sm:text-xs text-emerald-300 uppercase tracking-widest mb-1 block">Age</span>
-                        <span class="font-display text-lg sm:text-xl font-bold text-white leading-tight">19 Years Old</span>
+                        <span class="font-display text-base sm:text-lg lg:text-xl font-bold text-white leading-tight">19 Years Old</span>
                     </div>
-                    <div class="bento-card p-4 sm:p-5 flex flex-col justify-center border-t-2 border-t-blue-400">
+                    <div class="bento-card p-3.5 sm:p-4 flex flex-col justify-center border-t border-t-blue-400/40">
                         <span class="font-mono text-[10px] sm:text-xs text-blue-300 uppercase tracking-widest mb-1 block">Location</span>
-                        <span class="font-display text-lg sm:text-xl font-bold text-white leading-tight">Baguio City, PH</span>
+                        <span class="font-display text-base sm:text-lg lg:text-xl font-bold text-white leading-tight">Baguio City, Philippines</span>
                     </div>
-                    <div class="bento-card p-4 sm:p-5 flex flex-col justify-center border-t-2 border-t-purple-400">
+                    <div class="bento-card p-3.5 sm:p-4 flex flex-col justify-center border-t border-t-purple-400/40 col-span-2 sm:col-span-1">
                         <span class="font-mono text-[10px] sm:text-xs text-purple-300 uppercase tracking-widest mb-1 block">Languages</span>
-                        <span class="font-display text-base sm:text-lg font-bold text-white leading-tight">English, Tagalog, Ilocano, Kankana-ey, Ibaloi</span>
+                        <span class="font-display text-sm sm:text-base font-bold text-white leading-snug">English, Tagalog, Ilocano, Kankana-ey, Ibaloi</span>
                     </div>
                 </div>
 
-                <!-- MIDDLE ROW: Past, Present, Future (Enlarged Typography & Flex-1 to fill remaining space) -->
+                <!-- MIDDLE ROW: Past, Present, Future (Enlarged Typography & Ultra-Thin Hairline Borders) -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 flex-1 min-h-0">
                     <!-- Past -->
-                    <div class="bento-card p-5 sm:p-6 flex flex-col border-t-4 border-t-slate-400 overflow-y-auto">
-                        <div class="flex items-center gap-3.5 mb-3.5 shrink-0">
-                            <div class="w-11 h-11 rounded-xl bg-slate-500/20 text-slate-300 flex items-center justify-center text-lg">
+                    <div class="bento-card p-5 sm:p-6 flex flex-col border-t border-t-slate-300/35 overflow-y-auto">
+                        <div class="flex items-center gap-3.5 mb-3 shrink-0">
+                            <div class="w-11 h-11 rounded-xl bg-slate-500/15 border border-slate-400/20 text-slate-300 flex items-center justify-center text-lg">
                                 <i class="fa-solid fa-clock-rotate-left"></i>
                             </div>
                             <div>
@@ -418,15 +525,15 @@
                                 <h3 class="font-display text-2xl sm:text-3xl font-bold text-white">The Past</h3>
                             </div>
                         </div>
-                        <p class="text-base sm:text-lg lg:text-[1.15rem] text-slate-100 font-medium leading-relaxed">
-                            I was born in Baguio City, grew and raised at the province of Atok Benguet. My journey so far in this life has been great and I have a lot of interests of computers because I grew up with the curiosity of technology mainly playing computer games and watching hacking videos.
+                        <p class="text-base sm:text-lg lg:text-[1.18rem] text-slate-100 font-medium leading-relaxed">
+                            I was born in Baguio City, grew and raised at the province of Atok Benguet. I was a happy child back then in the good old days, childhood memories that can never be forgotten. My journey so far in this life has been great and I have a lot of interests of computers because I grew up with the curiosity of technology mainly playing computer games and watching hacking videos.
                         </p>
                     </div>
 
                     <!-- Present -->
-                    <div class="bento-card p-5 sm:p-6 flex flex-col border-t-4 border-t-sky-400 overflow-y-auto">
-                        <div class="flex items-center gap-3.5 mb-3.5 shrink-0">
-                            <div class="w-11 h-11 rounded-xl bg-blue-500/20 text-sky-400 flex items-center justify-center text-lg">
+                    <div class="bento-card p-5 sm:p-6 flex flex-col border-t border-t-sky-400/45 overflow-y-auto">
+                        <div class="flex items-center gap-3.5 mb-3 shrink-0">
+                            <div class="w-11 h-11 rounded-xl bg-blue-500/15 border border-sky-400/25 text-sky-400 flex items-center justify-center text-lg">
                                 <i class="fa-solid fa-bolt"></i>
                             </div>
                             <div>
@@ -435,14 +542,14 @@
                             </div>
                         </div>
                         <p class="text-base sm:text-lg lg:text-[1.15rem] text-blue-50 font-medium leading-relaxed">
-                            I am currently living at Baguio City with my grandmother, cousin, and two aunt's and currently enrolled at University of the Cordilleras 1st year taking the program of Bachelor of Science in Information Technology major in Network and Security.
+                            I am currently living at Baguio City with my grandmother, cousin, and two aunt's and currently enrolled at University of the Cordilleras 1st year taking the program of Bachelor of Science in Information Technology major in Network and Security. As a young adult I started to understand life even more, I feel like the world around me changed since the good old days and I am surprised everything has stepped up, soon I realized that life is becoming unpredictable a life of happiness and suffering. Suffering is part of life because failure is part of success.
                         </p>
                     </div>
 
                     <!-- Future -->
-                    <div class="bento-card p-5 sm:p-6 flex flex-col border-t-4 border-t-emerald-400 overflow-y-auto">
-                        <div class="flex items-center gap-3.5 mb-3.5 shrink-0">
-                            <div class="w-11 h-11 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg">
+                    <div class="bento-card p-5 sm:p-6 flex flex-col border-t border-t-emerald-400/45 overflow-y-auto">
+                        <div class="flex items-center gap-3.5 mb-3 shrink-0">
+                            <div class="w-11 h-11 rounded-xl bg-emerald-500/15 border border-emerald-400/25 text-emerald-400 flex items-center justify-center text-lg">
                                 <i class="fa-solid fa-rocket"></i>
                             </div>
                             <div>
@@ -450,48 +557,37 @@
                                 <h3 class="font-display text-2xl sm:text-3xl font-bold text-white">The Future</h3>
                             </div>
                         </div>
-                        <p class="text-base sm:text-lg lg:text-[1.15rem] text-emerald-50 font-medium leading-relaxed">
-                            In the future I would like to become a IT professional mainly focused on becoming a network and security professional or the having the variety of hacking and or a software developer mainly in creating apps and games
+                        <p class="text-base sm:text-lg lg:text-[1.18rem] text-emerald-50 font-medium leading-relaxed">
+                            In 5 to 10 years I would like to become an IT professional mainly focused on becoming a network and security professional or the having the variety of coding or a software developer mainly in creating apps and games.
                         </p>
                     </div>
                 </div>
 
-                <!-- BOTTOM ROW: Direct Clickable Social Links -->
-                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 shrink-0">
-                    <a href="https://www.facebook.com/jovari.lucas" target="_blank" rel="noopener noreferrer" class="bento-card p-3.5 sm:p-4 flex items-center justify-between group hover:bg-[#1877F2]/15 transition-colors border-l-4 border-l-[#1877F2] text-left cursor-pointer">
+                <!-- BOTTOM ROW: Direct Clickable Social Links (3-Column Grid with Sleek Thin Borders) -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 shrink-0">
+                    <a href="https://www.facebook.com/jovari.lucas" target="_blank" rel="noopener noreferrer" class="bento-card p-3.5 sm:p-4 flex items-center justify-between group hover:bg-[#1877F2]/15 transition-colors border-l border-l-[#1877F2]/60 text-left cursor-pointer">
                         <div class="flex items-center gap-3 overflow-hidden">
                             <i class="fa-brands fa-facebook text-2xl text-[#1877F2]"></i>
                             <div class="truncate">
                                 <span class="font-mono text-[10px] text-sky-300 block">FACEBOOK</span>
-                                <span id="soc-fb" class="font-display text-sm sm:text-base font-bold text-white group-hover:text-sky-300 transition-colors truncate block">https://www.facebook.com/jovari.lucas</span>
+                                <span id="soc-fb" class="font-display text-sm sm:text-base font-bold text-white group-hover:text-sky-300 transition-colors truncate block">Jovari Lucas</span>
                             </div>
                         </div>
                         <i class="fa-solid fa-arrow-up-right-from-square text-sky-400/60 group-hover:text-sky-300 transition-colors ml-2 shrink-0"></i>
                     </a>
 
-                    <a href="https://www.instagram.com/jovari.lucas" target="_blank" rel="noopener noreferrer" class="bento-card p-3.5 sm:p-4 flex items-center justify-between group hover:bg-[#E4405F]/15 transition-colors border-l-4 border-l-[#E4405F] text-left cursor-pointer">
+                    <a href="https://www.instagram.com/lucasurreal?obrf=MXhzbmJ5dnBkeDRvag==" target="_blank" rel="noopener noreferrer" class="bento-card p-3.5 sm:p-4 flex items-center justify-between group hover:bg-[#E4405F]/15 transition-colors border-l border-l-[#E4405F]/60 text-left cursor-pointer">
                         <div class="flex items-center gap-3 overflow-hidden">
                             <i class="fa-brands fa-instagram text-2xl text-[#E4405F]"></i>
                             <div class="truncate">
                                 <span class="font-mono text-[10px] text-sky-300 block">INSTAGRAM</span>
-                                <span id="soc-ig" class="font-display text-sm sm:text-base font-bold text-white group-hover:text-pink-300 transition-colors truncate block">@jovari.lucas</span>
+                                <span id="soc-ig" class="font-display text-sm sm:text-base font-bold text-white group-hover:text-pink-300 transition-colors truncate block">@lucasurreal</span>
                             </div>
                         </div>
                         <i class="fa-solid fa-arrow-up-right-from-square text-sky-400/60 group-hover:text-sky-300 transition-colors ml-2 shrink-0"></i>
                     </a>
 
-                    <a href="https://m.me/jovari.lucas" target="_blank" rel="noopener noreferrer" class="bento-card p-3.5 sm:p-4 flex items-center justify-between group hover:bg-[#00B2FF]/15 transition-colors border-l-4 border-l-[#00B2FF] text-left cursor-pointer">
-                        <div class="flex items-center gap-3 overflow-hidden">
-                            <i class="fa-brands fa-facebook-messenger text-2xl text-[#00B2FF]"></i>
-                            <div class="truncate">
-                                <span class="font-mono text-[10px] text-sky-300 block">MESSENGER</span>
-                                <span id="soc-msg" class="font-display text-sm sm:text-base font-bold text-white group-hover:text-sky-300 transition-colors truncate block">m.me/jovari.lucas</span>
-                            </div>
-                        </div>
-                        <i class="fa-solid fa-arrow-up-right-from-square text-sky-400/60 group-hover:text-sky-300 transition-colors ml-2 shrink-0"></i>
-                    </a>
-
-                    <a href="mailto:jovarilucas537@gmail.com" class="bento-card p-3.5 sm:p-4 flex items-center justify-between group hover:bg-[#EA4335]/15 transition-colors border-l-4 border-l-[#EA4335] text-left cursor-pointer">
+                    <a href="mailto:jovarilucas537@gmail.com" class="bento-card p-3.5 sm:p-4 flex items-center justify-between group hover:bg-[#EA4335]/15 transition-colors border-l border-l-[#EA4335]/60 text-left cursor-pointer">
                         <div class="flex items-center gap-3 overflow-hidden">
                             <i class="fa-solid fa-envelope text-2xl text-[#EA4335]"></i>
                             <div class="truncate">
@@ -514,7 +610,7 @@
             <div class="flex items-center justify-between gap-3 shrink-0 mb-3 anim-stagger-1">
                 <div>
                     <div class="flex items-center gap-2.5 font-mono text-xs text-sky-300">
-                        <span class="px-2.5 py-0.5 rounded bg-blue-500/25 font-bold border border-sky-400/30">PAGE 03 // 04</span>
+                        <span class="px-2.5 py-0.5 rounded bg-blue-500/20 font-bold border border-sky-400/20">PAGE 03 // 04</span>
                         <span>ACADEMIC BACKGROUND &amp; HONORS</span>
                     </div>
                     <h2 class="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight mt-0.5">
@@ -522,7 +618,7 @@
                     </h2>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button type="button" onclick="switchPage(2)" class="px-3.5 py-2 rounded-xl bg-[#0C2147]/90 hover:bg-blue-600 text-sky-200 hover:text-white font-mono text-xs font-semibold transition">
+                    <button type="button" onclick="switchPage(2)" class="px-3.5 py-2 rounded-xl bg-[#0C2147]/85 hover:bg-blue-600 text-sky-200 hover:text-white font-mono text-xs font-semibold border border-sky-400/15 transition">
                         <i class="fa-solid fa-arrow-left mr-1"></i>02 // Personal Info
                     </button>
                     <button type="button" onclick="switchPage(4)" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-mono text-xs font-bold transition shadow-md">
@@ -534,11 +630,11 @@
             <!-- STRICTLY 2 MONUMENTAL BOXES SIDE-BY-SIDE: BOX 1 (EDUCATION) & BOX 2 (ACHIEVEMENTS) -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-1 min-h-0 anim-stagger-2">
 
-                <!-- BOX 1: EDUCATION -->
-                <div class="bento-card p-5 sm:p-6 flex flex-col justify-between border-t-4 border-t-sky-400 min-h-0">
-                    <div class="flex items-center justify-between border-b border-sky-400/20 pb-3 mb-3 shrink-0">
+                <!-- BOX 1: EDUCATION (Ultra-Thin Hairline Border) -->
+                <div class="bento-card p-5 sm:p-6 flex flex-col justify-between border-t border-t-sky-400/45 min-h-0">
+                    <div class="flex items-center justify-between border-b border-sky-400/15 pb-3 mb-3 shrink-0">
                         <div class="flex items-center gap-3">
-                            <div class="w-11 h-11 rounded-xl bg-blue-600/30 border border-sky-400/40 text-sky-300 flex items-center justify-center text-xl">
+                            <div class="w-11 h-11 rounded-xl bg-blue-600/20 border border-sky-400/25 text-sky-300 flex items-center justify-center text-xl">
                                 <i class="fa-solid fa-graduation-cap"></i>
                             </div>
                             <div>
@@ -546,16 +642,16 @@
                                 <h3 class="font-display text-2xl sm:text-3xl font-bold text-white">Education</h3>
                             </div>
                         </div>
-                        <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 font-mono text-xs font-bold">
+                        <span class="px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-400/20 font-mono text-xs font-bold">
                             ● BSIT NETSEC
                         </span>
                     </div>
 
-                    <!-- 5 Education Items (Evenly Distributed to Fit 100vh) -->
+                    <!-- 5 Education Items (Evenly Distributed with Ultra-Thin Hairline Borders) -->
                     <div class="flex-1 min-h-0 flex flex-col justify-between gap-2.5">
                         <!-- 1. College -->
-                        <div class="flex-1 min-h-0 px-4 py-2.5 rounded-2xl bg-[#091B3E]/85 border border-sky-400/30 flex items-center gap-3.5">
-                            <div class="w-10 h-10 rounded-xl bg-blue-500/25 text-sky-300 flex items-center justify-center shrink-0">
+                        <div class="sub-item-card flex-1 min-h-0 px-4 py-2.5 rounded-2xl flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-sky-300 flex items-center justify-center shrink-0">
                                 <i class="fa-solid fa-building-columns text-base"></i>
                             </div>
                             <div class="min-w-0">
@@ -567,8 +663,8 @@
                         </div>
 
                         <!-- 2. Senior High School -->
-                        <div class="flex-1 min-h-0 px-4 py-2.5 rounded-2xl bg-[#091B3E]/85 border border-sky-400/25 flex items-center gap-3.5">
-                            <div class="w-10 h-10 rounded-xl bg-sky-500/20 text-sky-300 flex items-center justify-center shrink-0">
+                        <div class="sub-item-card flex-1 min-h-0 px-4 py-2.5 rounded-2xl flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-xl bg-sky-500/15 text-sky-300 flex items-center justify-center shrink-0">
                                 <i class="fa-solid fa-laptop-code text-base"></i>
                             </div>
                             <div class="min-w-0">
@@ -580,8 +676,8 @@
                         </div>
 
                         <!-- 3. Junior High School -->
-                        <div class="flex-1 min-h-0 px-4 py-2.5 rounded-2xl bg-[#091B3E]/85 border border-sky-400/25 flex items-center gap-3.5">
-                            <div class="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-300 flex items-center justify-center shrink-0">
+                        <div class="sub-item-card flex-1 min-h-0 px-4 py-2.5 rounded-2xl flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-xl bg-indigo-500/15 text-indigo-300 flex items-center justify-center shrink-0">
                                 <i class="fa-solid fa-school text-base"></i>
                             </div>
                             <div class="min-w-0">
@@ -593,8 +689,8 @@
                         </div>
 
                         <!-- 4. Elementary -->
-                        <div class="flex-1 min-h-0 px-4 py-2.5 rounded-2xl bg-[#091B3E]/85 border border-sky-400/25 flex items-center gap-3.5">
-                            <div class="w-10 h-10 rounded-xl bg-teal-500/20 text-teal-300 flex items-center justify-center shrink-0">
+                        <div class="sub-item-card flex-1 min-h-0 px-4 py-2.5 rounded-2xl flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-xl bg-teal-500/15 text-teal-300 flex items-center justify-center shrink-0">
                                 <i class="fa-solid fa-book-open-reader text-base"></i>
                             </div>
                             <div class="min-w-0">
@@ -606,8 +702,8 @@
                         </div>
 
                         <!-- 5. Nursery, Kinder 1, Kinder 2 -->
-                        <div class="flex-1 min-h-0 px-4 py-2.5 rounded-2xl bg-[#091B3E]/85 border border-sky-400/25 flex items-center gap-3.5">
-                            <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center shrink-0">
+                        <div class="sub-item-card flex-1 min-h-0 px-4 py-2.5 rounded-2xl flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-300 flex items-center justify-center shrink-0">
                                 <i class="fa-solid fa-shapes text-base"></i>
                             </div>
                             <div class="min-w-0">
@@ -620,11 +716,11 @@
                     </div>
                 </div>
 
-                <!-- BOX 2: ACHIEVEMENTS -->
-                <div class="bento-card p-5 sm:p-6 flex flex-col justify-between border-t-4 border-t-emerald-400 min-h-0">
-                    <div class="flex items-center justify-between border-b border-sky-400/20 pb-3 mb-3 shrink-0">
+                <!-- BOX 2: ACHIEVEMENTS (Ultra-Thin Hairline Border) -->
+                <div class="bento-card p-5 sm:p-6 flex flex-col justify-between border-t border-t-emerald-400/45 min-h-0">
+                    <div class="flex items-center justify-between border-b border-sky-400/15 pb-3 mb-3 shrink-0">
                         <div class="flex items-center gap-3">
-                            <div class="w-11 h-11 rounded-xl bg-emerald-500/25 border border-emerald-400/40 text-emerald-300 flex items-center justify-center text-xl">
+                            <div class="w-11 h-11 rounded-xl bg-emerald-500/20 border border-emerald-400/25 text-emerald-300 flex items-center justify-center text-xl">
                                 <i class="fa-solid fa-trophy"></i>
                             </div>
                             <div>
@@ -632,16 +728,16 @@
                                 <h3 class="font-display text-2xl sm:text-3xl font-bold text-white">Achievements</h3>
                             </div>
                         </div>
-                        <span class="px-3 py-1 rounded-full bg-blue-500/25 text-sky-300 border border-sky-400/35 font-mono text-xs font-bold">
+                        <span class="px-3 py-1 rounded-full bg-blue-500/15 text-sky-300 border border-sky-400/20 font-mono text-xs font-bold">
                             ● DISTINCTIONS
                         </span>
                     </div>
 
-                    <!-- 5 Achievement Items (Evenly Distributed to Fit 100vh) -->
+                    <!-- 5 Achievement Items (Evenly Distributed with Ultra-Thin Hairline Borders) -->
                     <div class="flex-1 min-h-0 flex flex-col justify-between gap-2.5">
                         <!-- 1. With Honors - Grade 12 -->
-                        <div class="flex-1 min-h-0 px-4 py-2.5 rounded-2xl bg-[#091B3E]/85 border border-sky-400/30 flex items-center gap-3.5">
-                            <div class="w-10 h-10 rounded-xl bg-amber-500/25 text-amber-300 flex items-center justify-center shrink-0">
+                        <div class="sub-item-card flex-1 min-h-0 px-4 py-2.5 rounded-2xl flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center shrink-0">
                                 <i class="fa-solid fa-medal text-base"></i>
                             </div>
                             <div class="min-w-0">
@@ -653,8 +749,8 @@
                         </div>
 
                         <!-- 2. With Honors - Kinder 1 and 2 -->
-                        <div class="flex-1 min-h-0 px-4 py-2.5 rounded-2xl bg-[#091B3E]/85 border border-sky-400/25 flex items-center gap-3.5">
-                            <div class="w-10 h-10 rounded-xl bg-sky-500/25 text-sky-300 flex items-center justify-center shrink-0">
+                        <div class="sub-item-card flex-1 min-h-0 px-4 py-2.5 rounded-2xl flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-xl bg-sky-500/20 text-sky-300 flex items-center justify-center shrink-0">
                                 <i class="fa-solid fa-star text-base"></i>
                             </div>
                             <div class="min-w-0">
@@ -666,8 +762,8 @@
                         </div>
 
                         <!-- 3. Loyalty Awardee -->
-                        <div class="flex-1 min-h-0 px-4 py-2.5 rounded-2xl bg-[#091B3E]/85 border border-sky-400/25 flex items-center gap-3.5">
-                            <div class="w-10 h-10 rounded-xl bg-emerald-500/25 text-emerald-300 flex items-center justify-center shrink-0">
+                        <div class="sub-item-card flex-1 min-h-0 px-4 py-2.5 rounded-2xl flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center shrink-0">
                                 <i class="fa-solid fa-award text-base"></i>
                             </div>
                             <div class="min-w-0">
@@ -679,8 +775,8 @@
                         </div>
 
                         <!-- 4. Performing Arts Awardee -->
-                        <div class="flex-1 min-h-0 px-4 py-2.5 rounded-2xl bg-[#091B3E]/85 border border-sky-400/25 flex items-center gap-3.5">
-                            <div class="w-10 h-10 rounded-xl bg-purple-500/25 text-purple-300 flex items-center justify-center shrink-0">
+                        <div class="sub-item-card flex-1 min-h-0 px-4 py-2.5 rounded-2xl flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-300 flex items-center justify-center shrink-0">
                                 <i class="fa-solid fa-music text-base"></i>
                             </div>
                             <div class="min-w-0">
@@ -692,8 +788,8 @@
                         </div>
 
                         <!-- 5. Adversity Quotient Leadership Certification -->
-                        <div class="flex-1 min-h-0 px-4 py-2.5 rounded-2xl bg-[#091B3E]/85 border border-sky-400/25 flex items-center gap-3.5">
-                            <div class="w-10 h-10 rounded-xl bg-rose-500/25 text-rose-300 flex items-center justify-center shrink-0">
+                        <div class="sub-item-card flex-1 min-h-0 px-4 py-2.5 rounded-2xl flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-300 flex items-center justify-center shrink-0">
                                 <i class="fa-solid fa-certificate text-base"></i>
                             </div>
                             <div class="min-w-0">
@@ -717,7 +813,7 @@
             <div class="flex items-center justify-between gap-3 shrink-0 mb-3 anim-stagger-1">
                 <div>
                     <div class="flex items-center gap-2.5 font-mono text-xs text-sky-300">
-                        <span class="px-2.5 py-0.5 rounded bg-blue-500/25 font-bold border border-sky-400/30">PAGE 04 // 04</span>
+                        <span class="px-2.5 py-0.5 rounded bg-blue-500/20 font-bold border border-sky-400/20">PAGE 04 // 04</span>
                         <span>FAMILY HERITAGE — MY MOTHER &amp; FATHER</span>
                     </div>
                     <h2 class="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight mt-0.5">
@@ -725,7 +821,7 @@
                     </h2>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button type="button" onclick="switchPage(3)" class="px-3.5 py-2 rounded-xl bg-[#0C2147]/90 hover:bg-blue-600 text-sky-200 hover:text-white font-mono text-xs font-semibold transition">
+                    <button type="button" onclick="switchPage(3)" class="px-3.5 py-2 rounded-xl bg-[#0C2147]/85 hover:bg-blue-600 text-sky-200 hover:text-white font-mono text-xs font-semibold border border-sky-400/15 transition">
                         <i class="fa-solid fa-arrow-left mr-1"></i>03 // Achievements
                     </button>
                     <button type="button" onclick="switchPage(1)" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-mono text-xs font-bold transition shadow-md">
@@ -734,30 +830,30 @@
                 </div>
             </div>
 
-            <!-- Side-by-Side Monumental Portrait Cards for Mother & Father (Fits 100vh Cleanly) -->
+            <!-- Side-by-Side Monumental Portrait Cards for Mother & Father (Ultra-Thin Hairline Borders) -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-1 min-h-0 anim-stagger-2">
 
                 <!-- MOTHER'S PORTRAIT CARD -->
-                <div class="bento-card p-5 sm:p-6 flex flex-col justify-between border-t-4 border-t-rose-400 min-h-0">
+                <div class="bento-card p-5 sm:p-6 flex flex-col justify-between border-t border-t-rose-400/45 min-h-0">
                     <div class="flex items-center justify-between font-mono text-xs shrink-0 mb-2.5">
-                        <span class="px-3 py-1 rounded-lg bg-rose-500/20 text-rose-300 border border-rose-400/35 font-bold">
+                        <span class="px-3 py-1 rounded-lg bg-rose-500/15 text-rose-300 border border-rose-400/20 font-bold">
                             Mother // Guiding Light &amp; Inspiration
                         </span>
                         <span class="text-sky-300/80">PORTRAIT // 01</span>
                     </div>
 
-                    <!-- Mother's Large Photo Upload Frame (Flex-1) -->
+                    <!-- Mother's Large Photo Upload Frame (Flex-1, Ultra-Thin Border) -->
                     <div id="dropzone-mother"
                          onclick="document.getElementById('upload-mother').click()"
                          ondragover="handleDragOver(event, 'dropzone-mother')"
                          ondragleave="handleDragLeave(event, 'dropzone-mother')"
                          ondrop="handleDrop(event, 'dropzone-mother', 'mother-img', 'mother-placeholder', 'netsec_photo_mother')"
-                         class="photo-dropzone parent-photo-frame flex-1 min-h-0 relative rounded-2xl overflow-hidden bg-[#091A3A] border border-sky-400/30 hover:border-rose-400 cursor-pointer transition-all my-1 flex items-center justify-center group shadow-xl">
+                         class="photo-dropzone parent-photo-frame flex-1 min-h-0 relative rounded-2xl overflow-hidden bg-[#091A3A]/90 border border-sky-400/15 hover:border-rose-400/50 cursor-pointer transition-all my-1 flex items-center justify-center group shadow-xl">
 
                         <img id="mother-img" src="" alt="Photo of My Mother" class="hidden w-full h-full object-cover">
 
                         <div id="mother-placeholder" class="w-full h-full flex flex-col items-center justify-center p-4 text-center select-none">
-                            <div class="w-16 h-16 rounded-2xl bg-[#0A1B3D] border border-rose-400/35 shadow-sm flex items-center justify-center mb-3 text-rose-400 group-hover:scale-105 transition-transform">
+                            <div class="w-16 h-16 rounded-2xl bg-[#0A1B3D] border border-rose-400/20 shadow-sm flex items-center justify-center mb-3 text-rose-400 group-hover:scale-105 transition-transform">
                                 <i class="fa-solid fa-heart text-2xl"></i>
                             </div>
                             <span class="font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-white">
@@ -768,7 +864,7 @@
                             </p>
                         </div>
 
-                        <div class="absolute inset-x-3 bottom-3 opacity-0 group-hover:opacity-100 transition-opacity bg-[#061229]/95 backdrop-blur-md border border-sky-400/35 rounded-xl px-3.5 py-2 flex items-center justify-between shadow-lg">
+                        <div class="absolute inset-x-3 bottom-3 opacity-0 group-hover:opacity-100 transition-opacity bg-[#061229]/95 backdrop-blur-md border border-sky-400/20 rounded-xl px-3.5 py-2 flex items-center justify-between shadow-lg">
                             <span class="font-mono text-xs font-semibold text-white">
                                 <i class="fa-solid fa-camera text-rose-400 mr-2"></i>Upload Mother's Photo
                             </span>
@@ -784,33 +880,33 @@
                             </h3>
                             <span class="font-mono text-[10px] uppercase tracking-wider text-rose-300">MY INSPIRATION</span>
                         </div>
-                        <blockquote class="p-3.5 rounded-xl bg-[#091B3E]/85 border-l-4 border-l-rose-400 text-blue-100/95 text-xs sm:text-sm italic leading-relaxed">
+                        <blockquote class="p-3.5 rounded-xl bg-[#091B3E]/75 border border-rose-400/20 text-blue-100/95 text-xs sm:text-sm italic leading-relaxed">
                             "Her endless patience, loving guidance, and quiet sacrifices have been my anchor through every season of life. She taught me compassion, humility, and the perseverance to keep striving toward my dreams in Information Technology."
                         </blockquote>
                     </div>
                 </div>
 
                 <!-- FATHER'S PORTRAIT CARD -->
-                <div class="bento-card p-5 sm:p-6 flex flex-col justify-between border-t-4 border-t-sky-400 min-h-0">
+                <div class="bento-card p-5 sm:p-6 flex flex-col justify-between border-t border-t-sky-400/45 min-h-0">
                     <div class="flex items-center justify-between font-mono text-xs shrink-0 mb-2.5">
-                        <span class="px-3 py-1 rounded-lg bg-blue-500/25 text-sky-300 border border-sky-400/35 font-bold">
+                        <span class="px-3 py-1 rounded-lg bg-blue-500/15 text-sky-300 border border-sky-400/20 font-bold">
                             Father // Pillar of Strength &amp; Discipline
                         </span>
                         <span class="text-sky-300/80">PORTRAIT // 02</span>
                     </div>
 
-                    <!-- Father's Large Photo Upload Frame (Flex-1) -->
+                    <!-- Father's Large Photo Upload Frame (Flex-1, Ultra-Thin Border) -->
                     <div id="dropzone-father"
                          onclick="document.getElementById('upload-father').click()"
                          ondragover="handleDragOver(event, 'dropzone-father')"
                          ondragleave="handleDragLeave(event, 'dropzone-father')"
                          ondrop="handleDrop(event, 'dropzone-father', 'father-img', 'father-placeholder', 'netsec_photo_father')"
-                         class="photo-dropzone parent-photo-frame flex-1 min-h-0 relative rounded-2xl overflow-hidden bg-[#091A3A] border border-sky-400/30 hover:border-sky-400 cursor-pointer transition-all my-1 flex items-center justify-center group shadow-xl">
+                         class="photo-dropzone parent-photo-frame flex-1 min-h-0 relative rounded-2xl overflow-hidden bg-[#091A3A]/90 border border-sky-400/15 hover:border-sky-400/50 cursor-pointer transition-all my-1 flex items-center justify-center group shadow-xl">
 
                         <img id="father-img" src="" alt="Photo of My Father" class="hidden w-full h-full object-cover">
 
                         <div id="father-placeholder" class="w-full h-full flex flex-col items-center justify-center p-4 text-center select-none">
-                            <div class="w-16 h-16 rounded-2xl bg-[#0A1B3D] border border-sky-400/35 shadow-sm flex items-center justify-center mb-3 text-sky-400 group-hover:scale-105 transition-transform">
+                            <div class="w-16 h-16 rounded-2xl bg-[#0A1B3D] border border-sky-400/20 shadow-sm flex items-center justify-center mb-3 text-sky-400 group-hover:scale-105 transition-transform">
                                 <i class="fa-solid fa-shield-heart text-2xl"></i>
                             </div>
                             <span class="font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-white">
@@ -821,7 +917,7 @@
                             </p>
                         </div>
 
-                        <div class="absolute inset-x-3 bottom-3 opacity-0 group-hover:opacity-100 transition-opacity bg-[#061229]/95 backdrop-blur-md border border-sky-400/35 rounded-xl px-3.5 py-2 flex items-center justify-between shadow-lg">
+                        <div class="absolute inset-x-3 bottom-3 opacity-0 group-hover:opacity-100 transition-opacity bg-[#061229]/95 backdrop-blur-md border border-sky-400/20 rounded-xl px-3.5 py-2 flex items-center justify-between shadow-lg">
                             <span class="font-mono text-xs font-semibold text-white">
                                 <i class="fa-solid fa-camera text-sky-400 mr-2"></i>Upload Father's Photo
                             </span>
@@ -837,7 +933,7 @@
                             </h3>
                             <span class="font-mono text-[10px] uppercase tracking-wider text-sky-300">MY FOUNDATION</span>
                         </div>
-                        <blockquote class="p-3.5 rounded-xl bg-[#091B3E]/85 border-l-4 border-l-sky-400 text-blue-100/95 text-xs sm:text-sm italic leading-relaxed">
+                        <blockquote class="p-3.5 rounded-xl bg-[#091B3E]/75 border border-sky-400/20 text-blue-100/95 text-xs sm:text-sm italic leading-relaxed">
                             "His steadfast discipline, practical wisdom, and quiet strength showed me what it means to work hard with integrity. Every technical problem I solve and every goal I reach is a reflection of the example he set for me."
                         </blockquote>
                     </div>
@@ -957,7 +1053,7 @@
             }
         });
 
-        /* 2. INTERACTIVE CYBER NETWORK TOPOLOGY PARTICLE ANIMATION */
+        /* 2. INTERACTIVE CYBER NETWORK TOPOLOGY & LIVE DATA PACKET ANIMATION */
         function initCyberCanvas() {
             const canvas = document.getElementById('cyber-canvas');
             if (!canvas) return;
@@ -966,16 +1062,18 @@
             let height = canvas.height = window.innerHeight;
 
             const nodes = [];
-            const nodeCount = Math.min(48, Math.floor((width * height) / 28000));
+            const packets = [];
+            const nodeCount = Math.min(54, Math.floor((width * height) / 25000));
             const mouse = { x: -1000, y: -1000 };
 
             for (let i = 0; i < nodeCount; i++) {
                 nodes.push({
                     x: Math.random() * width,
                     y: Math.random() * height,
-                    vx: (Math.random() - 0.5) * 0.45,
-                    vy: (Math.random() - 0.5) * 0.45,
-                    r: Math.random() * 1.8 + 1.1
+                    vx: (Math.random() - 0.5) * 0.48,
+                    vy: (Math.random() - 0.5) * 0.48,
+                    r: Math.random() * 1.9 + 1.1,
+                    pulse: Math.random() * Math.PI * 2
                 });
             }
 
@@ -996,51 +1094,84 @@
                     const n = nodes[i];
                     n.x += n.vx;
                     n.y += n.vy;
+                    n.pulse += 0.03;
 
                     if (n.x < 0 || n.x > width) n.vx *= -1;
                     if (n.y < 0 || n.y > height) n.vy *= -1;
 
-                    // Draw Node
+                    // Draw Pulsing Telemetry Node
+                    const glowRadius = n.r + Math.sin(n.pulse) * 0.6;
                     ctx.beginPath();
-                    ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-                    ctx.fillStyle = 'rgba(56, 189, 248, 0.65)';
+                    ctx.arc(n.x, n.y, Math.max(0.8, glowRadius), 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(56, 189, 248, 0.78)';
                     ctx.fill();
 
-                    // Connect nearby nodes
+                    // Connect nearby nodes & spawn live cyber packets
                     for (let j = i + 1; j < nodes.length; j++) {
                         const m = nodes[j];
                         const dx = n.x - m.x;
                         const dy = n.y - m.y;
                         const dist = Math.hypot(dx, dy);
-                        if (dist < 155) {
+                        if (dist < 165) {
                             ctx.beginPath();
                             ctx.moveTo(n.x, n.y);
                             ctx.lineTo(m.x, m.y);
-                            ctx.strokeStyle = `rgba(56, 189, 248, ${(1 - dist / 155) * 0.22})`;
-                            ctx.lineWidth = 1;
+                            ctx.strokeStyle = `rgba(56, 189, 248, ${(1 - dist / 165) * 0.24})`;
+                            ctx.lineWidth = 0.85;
                             ctx.stroke();
+
+                            // Occasionally emit a glowing network packet along this link
+                            if (packets.length < 18 && Math.random() < 0.0012) {
+                                packets.push({
+                                    from: n,
+                                    to: m,
+                                    progress: 0,
+                                    speed: 0.014 + Math.random() * 0.016
+                                });
+                            }
                         }
                     }
 
-                    // Connect to mouse cursor
+                    // Interactive connection to mouse cursor
                     const mdx = n.x - mouse.x;
                     const mdy = n.y - mouse.y;
                     const mDist = Math.hypot(mdx, mdy);
-                    if (mDist < 190) {
+                    if (mDist < 200) {
                         ctx.beginPath();
                         ctx.moveTo(n.x, n.y);
                         ctx.lineTo(mouse.x, mouse.y);
-                        ctx.strokeStyle = `rgba(56, 189, 248, ${(1 - mDist / 190) * 0.42})`;
-                        ctx.lineWidth = 1.2;
+                        ctx.strokeStyle = `rgba(56, 189, 248, ${(1 - mDist / 200) * 0.45})`;
+                        ctx.lineWidth = 1;
                         ctx.stroke();
                     }
                 }
+
+                // Draw & update live traveling data packets
+                for (let k = packets.length - 1; k >= 0; k--) {
+                    const p = packets[k];
+                    p.progress += p.speed;
+                    if (p.progress >= 1) {
+                        packets.splice(k, 1);
+                        continue;
+                    }
+                    const px = p.from.x + (p.to.x - p.from.x) * p.progress;
+                    const py = p.from.y + (p.to.y - p.from.y) * p.progress;
+
+                    ctx.beginPath();
+                    ctx.arc(px, py, 2.2, 0, Math.PI * 2);
+                    ctx.fillStyle = '#E0F2FE';
+                    ctx.shadowColor = '#38BDF8';
+                    ctx.shadowBlur = 8;
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                }
+
                 requestAnimationFrame(drawNetwork);
             }
             drawNetwork();
         }
 
-        /* 3. CARD SPOTLIGHT HOVER EFFECT */
+        /* 3. CARD SPOTLIGHT & 3D MICRO-TILT HOVER EFFECT */
         function initCardSpotlights() {
             document.addEventListener('mousemove', (e) => {
                 document.querySelectorAll('.bento-card').forEach(card => {
@@ -1049,6 +1180,16 @@
                     const y = e.clientY - rect.top;
                     card.style.setProperty('--mouse-x', `${x}px`);
                     card.style.setProperty('--mouse-y', `${y}px`);
+
+                    if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+                        const rx = ((y / rect.height) - 0.5) * -2.6;
+                        const ry = ((x / rect.width) - 0.5) * 2.6;
+                        card.style.setProperty('--rx', `${rx.toFixed(2)}deg`);
+                        card.style.setProperty('--ry', `${ry.toFixed(2)}deg`);
+                    } else {
+                        card.style.setProperty('--rx', '0deg');
+                        card.style.setProperty('--ry', '0deg');
+                    }
                 });
             });
         }
