@@ -28,7 +28,7 @@
                         cobaltDark: '#1D4ED8',
                         emeraldSec: '#059669',
                         alabaster: '#F8FAFC',
-                        blueprint: '#07142C',
+                        blueprint: '#090909',
                     }
                 }
             }
@@ -41,9 +41,9 @@
            ========================================================= */
         :root,
         html.dark {
-            --bg-primary: #07142C;
-            --bg-gradient-top: #0F2957;
-            --bg-gradient-bottom: #050E21;
+            --bg-primary: #090909;
+            --bg-gradient-top: #090909;
+            --bg-gradient-bottom: #090909;
             --bg-card: rgba(10, 26, 58, 0.76);
             --bg-subtle: rgba(15, 38, 82, 0.68);
             --text-primary: #F8FAFC;
@@ -57,9 +57,9 @@
 
         /* Alternate Dark Blue Shade: Royal Cobalt Blue */
         html.royal-blue {
-            --bg-primary: #0C224A;
-            --bg-gradient-top: #163773;
-            --bg-gradient-bottom: #081838;
+            --bg-primary: #090909;
+            --bg-gradient-top: #090909;
+            --bg-gradient-bottom: #090909;
             --bg-card: rgba(18, 44, 96, 0.78);
             --bg-subtle: rgba(25, 58, 120, 0.70);
             --border-hairline: rgba(96, 165, 250, 0.16);
@@ -85,7 +85,7 @@
             transition: background-color 0.35s ease, color 0.35s ease;
             background-image:
                 radial-gradient(circle at 15% 15%, var(--bg-gradient-top) 0%, transparent 50%),
-                radial-gradient(circle at 85% 85%, #102C61 0%, transparent 50%),
+                radial-gradient(circle at 85% 85%, #090909 0%, transparent 50%),
                 linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
                 linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px),
                 linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-gradient-bottom) 100%);
@@ -389,6 +389,41 @@
             #friends-card { padding: 10px 12px; }
         }
 
+    
+        /* Black surfaces with gold accents across every page. */
+        :root, html.dark, html.royal-blue {
+            --bg-primary: #050505; --bg-gradient-top: #181818; --bg-gradient-bottom: #000000;
+            --bg-card: rgba(15,15,15,.94); --bg-subtle: rgba(24,24,24,.9);
+            --text-primary: #FAFAF7; --text-secondary: #E8E5DB; --text-muted: #C5BC9F;
+            --border-hairline: rgba(212,175,55,.65); --accent-primary: #D4AF37;
+            --grid-line: rgba(212,175,55,.035); --card-shadow: 0 20px 48px -14px rgba(0,0,0,.8);
+        }
+        html, body { background-color: #050505; background-image: linear-gradient(180deg,#111 0%,#000 100%); }
+        .aurora-orb, #cyber-canvas { opacity: .08; filter: grayscale(1); }
+        #dynamic-photo-bg { opacity: .18; }
+        .bento-card, .sub-item-card, .photo-dropzone { background: rgba(14,14,14,.94); border: 1px solid #B89636 !important; }
+        .bento-card:hover, .sub-item-card:hover { border-color: #F0D277 !important; }
+        [class*="border-"] { border-color: rgba(212,175,55,.6) !important; }
+        [class*="bg-blue-"], [class*="bg-sky-"], [class*="bg-cyan-"] { background-color: #1C1A13 !important; }
+        .bg-blue-600 { background-color: #B89636 !important; color: #080808 !important; }
+        [class*="text-sky-"], [class*="text-blue-"], [class*="text-cyan-"],
+        [class*="text-emerald-"], [class*="text-purple-"], [class*="text-rose-"] { color: #DDC578 !important; }
+        .hero-name-shimmer { background-image: linear-gradient(110deg,#fff 15%,#D4AF37 45%,#fff 75%) !important; }
+        #gallery-lightbox { background: rgba(0,0,0,.96) !important; }
+        #gallery-counter { background: #16130B !important; }
+        #personal-detail-boxes h3 { font-size: clamp(26px,2.2vw,34px); margin-bottom: 14px; }
+        #personal-detail-boxes ul, #personal-detail-boxes p { font-size: clamp(19px,1.6vw,24px); line-height: 1.4; }
+        #personal-detail-boxes ul { flex: initial; }
+        #personal-detail-boxes li { gap: 12px; margin-top: 10px; }
+        #personal-detail-boxes li:first-child { margin-top: 0; }
+        #personal-detail-boxes .program-detail { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; border-top: 1px solid rgba(212,175,55,.35); padding-top: 10px; }
+        #personal-detail-boxes .program-detail span:last-child { font-family: 'Plus Jakarta Sans',sans-serif; font-size: 1em; }
+        @media (max-height: 760px) and (min-width: 1024px) {
+            #personal-detail-boxes > .bento-card { padding: 16px; }
+            #personal-detail-boxes ul, #personal-detail-boxes p { font-size: 19px; line-height: 1.3; }
+            #personal-detail-boxes li { margin-top: 6px; padding-bottom: 4px; }
+        }
+
     </style>
 </head>
 <body class="selection:bg-blue-500 selection:text-white flex flex-col h-screen overflow-hidden text-slate-100 orientation-landscape">
@@ -396,7 +431,7 @@
     <!-- Dynamic Blurred Portrait Photo Background Layer (Permanently set to https://framerusercontent.com/images/jbHAGbEhaO5Q853i3lHwVojx8.jpg?width=2752&amp;height=1536&amp;kb=203) -->
     <div id="dynamic-photo-bg" class="fixed inset-0 pointer-events-none overflow-hidden transition-opacity duration-700 opacity-100" style="z-index: 0;">
         <img id="bg-blur-img" src="https://framerusercontent.com/images/jbHAGbEhaO5Q853i3lHwVojx8.jpg?width=2752&amp;height=1536&amp;kb=203" alt="" class="w-full h-full object-cover" style="filter: blur(14px) brightness(0.92) saturate(1.15); transform: scale(1.06);">
-        <div class="absolute inset-0" style="background: radial-gradient(circle at center, rgba(7, 20, 44, 0.45) 0%, rgba(5, 14, 33, 0.75) 100%);"></div>
+        <div class="absolute inset-0" style="background: radial-gradient(circle at center, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.75) 100%);"></div>
     </div>
 
     <!-- Ambient Atmospheric Aurora Light Orbs -->
@@ -413,7 +448,7 @@
     <!-- =========================================================
          TOP NAVIGATION BAR (Sleek Dark Blue Glass)
          ========================================================= -->
-    <header class="relative z-40 bg-[#061229]/75 backdrop-blur-xl border-b border-sky-400/15 transition-colors shadow-xl shrink-0">
+    <header class="relative z-40 bg-[#090909]/75 backdrop-blur-xl border-b border-sky-400/15 transition-colors shadow-xl shrink-0">
         <div class="widescreen-shell px-2 sm:px-6 h-[4.5rem] relative flex items-center justify-between">
             <!-- Brand / Page Indicator -->
             <div class="flex items-center gap-3 relative z-10">
@@ -470,7 +505,7 @@
                         <p class="font-display font-semibold uppercase tracking-[0.14em] text-blue-100 leading-snug" style="font-size: clamp(0.85rem, 1.65vh, 1.25rem); text-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);">
                             Bachelor of Science in Information Technology
                         </p>
-                        <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-[#091A3A]/80 backdrop-blur-md text-sky-300 font-mono text-xs sm:text-sm font-bold uppercase tracking-widest shadow-lg">
+                        <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-[#090909]/80 backdrop-blur-md text-sky-300 font-mono text-xs sm:text-sm font-bold uppercase tracking-widest shadow-lg">
                             <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
                             <span>Major in Network and Security</span>
                         </div>
@@ -508,7 +543,7 @@
                     </h2>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button type="button" onclick="switchPage(1)" class="px-3.5 py-2 rounded-xl bg-[#0C2147]/85 hover:bg-blue-600 text-sky-200 hover:text-white font-mono text-xs font-semibold border border-sky-400/15 transition">
+                    <button type="button" onclick="switchPage(1)" class="px-3.5 py-2 rounded-xl bg-[#090909]/85 hover:bg-blue-600 text-sky-200 hover:text-white font-mono text-xs font-semibold border border-sky-400/15 transition">
                         <i class="fa-solid fa-arrow-left mr-1"></i>01 // Home
                     </button>
                     <button type="button" onclick="switchPage(3)" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-mono text-xs font-bold transition shadow-md">
@@ -545,7 +580,7 @@
                 </div>
 
                 <!-- MIDDLE ROW: Physical Details, Address, Hobbies -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 flex-1 min-h-0">
+                <div id="personal-detail-boxes" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 flex-1 min-h-0">
                     <!-- Physical & Demographics -->
                     <div class="bento-card p-5 sm:p-6 flex flex-col justify-center border-t border-t-slate-300/35 overflow-y-auto custom-scrollbar">
                         <h3 class="font-display text-2xl font-bold text-white mb-5 flex items-center gap-2">
@@ -556,6 +591,7 @@
                             <li class="flex justify-between items-center border-b border-sky-400/10 pb-2"><span class="text-sky-400 font-bold">Weight:</span> <span>72kg</span></li>
                             <li class="flex justify-between items-center border-b border-sky-400/10 pb-2"><span class="text-sky-400 font-bold">Nationality:</span> <span>Filipino</span></li>
                             <li class="flex justify-between items-center"><span class="text-sky-400 font-bold">Ethnicity:</span> <span>Ibaloi</span></li>
+                            <li class="program-detail"><span class="text-sky-400 font-bold">Program:</span> <span>Bachelor of Science in Information Technology</span></li>
                         </ul>
                     </div>
 
@@ -567,7 +603,8 @@
                         <p class="text-lg lg:text-xl text-blue-50 font-medium leading-relaxed">
                             Maria Pucay Rd.<br>
                             Central Guisad<br>
-                            Baguio City
+                            Baguio City<br><br>
+                            Sawingan, Naguey Atok Benguet
                         </p>
                     </div>
 
@@ -640,7 +677,7 @@
                     </h2>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button type="button" onclick="switchPage(2)" class="px-3.5 py-2 rounded-xl bg-[#0C2147]/85 hover:bg-blue-600 text-sky-200 hover:text-white font-mono text-xs font-semibold border border-sky-400/15 transition">
+                    <button type="button" onclick="switchPage(2)" class="px-3.5 py-2 rounded-xl bg-[#090909]/85 hover:bg-blue-600 text-sky-200 hover:text-white font-mono text-xs font-semibold border border-sky-400/15 transition">
                         <i class="fa-solid fa-arrow-left mr-1"></i>02 // Personal Info
                     </button>
                     <button type="button" onclick="switchPage(4)" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-mono text-xs font-bold transition shadow-md">
@@ -775,8 +812,8 @@
                             </div>
                             <!-- Permanent Thumbnails -->
                             <div class="flex items-center -space-x-3 shrink-0 ml-2">
-                                <img src="https://framerusercontent.com/images/H0vf3e5Rsuplj8m39nZcgUz7nec.jpg?width=3072&amp;height=4080&amp;kb=1451" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform">
-                                <img src="https://framerusercontent.com/images/dqYgzadYUOpQB4DHeoFJFDtKk.jpg?width=4080&amp;height=3072&amp;kb=566" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform delay-75">
+                                <img src="https://framerusercontent.com/images/H0vf3e5Rsuplj8m39nZcgUz7nec.jpg?width=3072&amp;height=4080&amp;kb=1451" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#090909] shadow-md group-hover:-translate-y-1 transition-transform">
+                                <img src="https://framerusercontent.com/images/dqYgzadYUOpQB4DHeoFJFDtKk.jpg?width=4080&amp;height=3072&amp;kb=566" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#090909] shadow-md group-hover:-translate-y-1 transition-transform delay-75">
                             </div>
                         </div>
 
@@ -792,8 +829,8 @@
                                 </h4>
                             </div>
                             <div class="flex items-center -space-x-3 shrink-0 ml-2">
-                                <img src="https://framerusercontent.com/images/BLYo7hCsm0XqibmtZzaR2DmVysM.jpg?width=3072&amp;height=4080&amp;kb=1516" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform">
-                                <img src="https://framerusercontent.com/images/DQNqo1tUtl8xzdshpwtamfyLdxo.jpg?width=3072&amp;height=4080&amp;kb=1461" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform delay-75">
+                                <img src="https://framerusercontent.com/images/BLYo7hCsm0XqibmtZzaR2DmVysM.jpg?width=3072&amp;height=4080&amp;kb=1516" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#090909] shadow-md group-hover:-translate-y-1 transition-transform">
+                                <img src="https://framerusercontent.com/images/DQNqo1tUtl8xzdshpwtamfyLdxo.jpg?width=3072&amp;height=4080&amp;kb=1461" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#090909] shadow-md group-hover:-translate-y-1 transition-transform delay-75">
                             </div>
                         </div>
 
@@ -809,10 +846,10 @@
                                 </h4>
                             </div>
                             <div class="flex items-center -space-x-4 shrink-0 ml-2">
-                                <img src="https://framerusercontent.com/images/v1guaQIxD3jYcgc0pfB3pZLFqA4.jpg?width=3072&amp;height=4080&amp;kb=539" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform z-[4]">
-                                <img src="https://framerusercontent.com/images/WQShTH5B4hdHUFp8UipoLLUfEQ.jpg?width=4080&amp;height=3072&amp;kb=583" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform delay-[50ms] z-[3]">
-                                <img src="https://framerusercontent.com/images/werUevB2IZ0k8g8C7BNOWrc3Sg.jpg?width=3072&amp;height=4080&amp;kb=1335" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform delay-75 z-[2]">
-                                <img src="https://framerusercontent.com/images/jkYJ7zpC2RwAxojCRY07X8Un1jM.jpg?width=3072&amp;height=4080&amp;kb=1460" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform delay-100 z-[1]">
+                                <img src="https://framerusercontent.com/images/v1guaQIxD3jYcgc0pfB3pZLFqA4.jpg?width=3072&amp;height=4080&amp;kb=539" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#090909] shadow-md group-hover:-translate-y-1 transition-transform z-[4]">
+                                <img src="https://framerusercontent.com/images/WQShTH5B4hdHUFp8UipoLLUfEQ.jpg?width=4080&amp;height=3072&amp;kb=583" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#090909] shadow-md group-hover:-translate-y-1 transition-transform delay-[50ms] z-[3]">
+                                <img src="https://framerusercontent.com/images/werUevB2IZ0k8g8C7BNOWrc3Sg.jpg?width=3072&amp;height=4080&amp;kb=1335" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#090909] shadow-md group-hover:-translate-y-1 transition-transform delay-75 z-[2]">
+                                <img src="https://framerusercontent.com/images/jkYJ7zpC2RwAxojCRY07X8Un1jM.jpg?width=3072&amp;height=4080&amp;kb=1460" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#090909] shadow-md group-hover:-translate-y-1 transition-transform delay-100 z-[1]">
                             </div>
                         </div>
 
@@ -828,7 +865,7 @@
                                 </h4>
                             </div>
                             <div class="flex items-center shrink-0 ml-2">
-                                <img src="https://framerusercontent.com/images/Rghx1j8iTGO8UbtuEpyBzxyeD2s.jpg?width=4080&amp;height=3072&amp;kb=607" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform">
+                                <img src="https://framerusercontent.com/images/Rghx1j8iTGO8UbtuEpyBzxyeD2s.jpg?width=4080&amp;height=3072&amp;kb=607" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#090909] shadow-md group-hover:-translate-y-1 transition-transform">
                             </div>
                         </div>
                         
@@ -844,7 +881,7 @@
                                 </h4>
                             </div>
                             <div class="flex items-center shrink-0 ml-2">
-                                <img src="https://framerusercontent.com/images/IWeg1XxTBN45WK1xkIuzyWcU54.jpg?width=5184&amp;height=3456&amp;kb=6277" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform">
+                                <img src="https://framerusercontent.com/images/IWeg1XxTBN45WK1xkIuzyWcU54.jpg?width=5184&amp;height=3456&amp;kb=6277" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#090909] shadow-md group-hover:-translate-y-1 transition-transform">
                             </div>
                         </div>
 
@@ -870,7 +907,7 @@
                     </h2>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button type="button" onclick="switchPage(3)" class="px-3.5 py-2 rounded-xl bg-[#0C2147]/85 hover:bg-blue-600 text-sky-200 hover:text-white font-mono text-xs font-semibold border border-sky-400/15 transition">
+                    <button type="button" onclick="switchPage(3)" class="px-3.5 py-2 rounded-xl bg-[#090909]/85 hover:bg-blue-600 text-sky-200 hover:text-white font-mono text-xs font-semibold border border-sky-400/15 transition">
                         <i class="fa-solid fa-arrow-left mr-1"></i>03 // Achievements
                     </button>
                     <button type="button" onclick="switchPage(1)" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-mono text-xs font-bold transition shadow-md">
@@ -896,10 +933,10 @@
                              ondragover="handleDragOver(event, 'dropzone-mother')"
                              ondragleave="handleDragLeave(event, 'dropzone-mother')"
                              ondrop="handleDrop(event, 'dropzone-mother', 'mother-img', 'mother-placeholder', 'netsec_photo_mother', 600)"
-                             class="photo-dropzone w-full aspect-square relative rounded-2xl overflow-hidden bg-[#091A3A]/90 border border-sky-400/15 hover:border-rose-400/50 cursor-pointer transition-all my-1 flex items-center justify-center group shadow-xl">
+                             class="photo-dropzone w-full aspect-square relative rounded-2xl overflow-hidden bg-[#090909]/90 border border-sky-400/15 hover:border-rose-400/50 cursor-pointer transition-all my-1 flex items-center justify-center group shadow-xl">
                             <img id="mother-img" src="" alt="Photo of My Mother" class="hidden w-full h-full object-cover">
                             <div id="mother-placeholder" class="w-full h-full flex flex-col items-center justify-center p-4 text-center select-none">
-                                <div class="w-12 h-12 rounded-2xl bg-[#0A1B3D] border border-rose-400/20 shadow-sm flex items-center justify-center mb-2 text-rose-400 group-hover:scale-105 transition-transform">
+                                <div class="w-12 h-12 rounded-2xl bg-[#090909] border border-rose-400/20 shadow-sm flex items-center justify-center mb-2 text-rose-400 group-hover:scale-105 transition-transform">
                                     <i class="fa-solid fa-heart text-xl"></i>
                                 </div>
                                 <span class="font-mono text-xs font-bold text-white">Upload Mother</span>
@@ -920,10 +957,10 @@
                              ondragover="handleDragOver(event, 'dropzone-father')"
                              ondragleave="handleDragLeave(event, 'dropzone-father')"
                              ondrop="handleDrop(event, 'dropzone-father', 'father-img', 'father-placeholder', 'netsec_photo_father', 600)"
-                             class="photo-dropzone w-full aspect-square relative rounded-2xl overflow-hidden bg-[#091A3A]/90 border border-sky-400/15 hover:border-sky-400/50 cursor-pointer transition-all my-1 flex items-center justify-center group shadow-xl">
+                             class="photo-dropzone w-full aspect-square relative rounded-2xl overflow-hidden bg-[#090909]/90 border border-sky-400/15 hover:border-sky-400/50 cursor-pointer transition-all my-1 flex items-center justify-center group shadow-xl">
                             <img id="father-img" src="" alt="Photo of My Father" class="hidden w-full h-full object-cover">
                             <div id="father-placeholder" class="w-full h-full flex flex-col items-center justify-center p-4 text-center select-none">
-                                <div class="w-12 h-12 rounded-2xl bg-[#0A1B3D] border border-sky-400/20 shadow-sm flex items-center justify-center mb-2 text-sky-400 group-hover:scale-105 transition-transform">
+                                <div class="w-12 h-12 rounded-2xl bg-[#090909] border border-sky-400/20 shadow-sm flex items-center justify-center mb-2 text-sky-400 group-hover:scale-105 transition-transform">
                                     <i class="fa-solid fa-shield-heart text-xl"></i>
                                 </div>
                                 <span class="font-mono text-xs font-bold text-white">Upload Father</span>
@@ -945,10 +982,10 @@
                              ondragover="handleDragOver(event, 'dropzone-sibling')"
                              ondragleave="handleDragLeave(event, 'dropzone-sibling')"
                              ondrop="handleDrop(event, 'dropzone-sibling', 'sibling-img', 'sibling-placeholder', 'netsec_photo_sibling', 600)"
-                             class="photo-dropzone w-full aspect-square relative rounded-2xl overflow-hidden bg-[#091A3A]/90 border border-sky-400/15 hover:border-purple-400/50 cursor-pointer transition-all my-1 flex items-center justify-center group shadow-xl">
+                             class="photo-dropzone w-full aspect-square relative rounded-2xl overflow-hidden bg-[#090909]/90 border border-sky-400/15 hover:border-purple-400/50 cursor-pointer transition-all my-1 flex items-center justify-center group shadow-xl">
                             <img id="sibling-img" src="" class="hidden w-full h-full object-cover">
                             <div id="sibling-placeholder" class="w-full h-full flex flex-col items-center justify-center p-4 text-center select-none">
-                                <div class="w-12 h-12 rounded-2xl bg-[#0A1B3D] border border-purple-400/20 shadow-sm flex items-center justify-center mb-2 text-purple-400 group-hover:scale-105 transition-transform">
+                                <div class="w-12 h-12 rounded-2xl bg-[#090909] border border-purple-400/20 shadow-sm flex items-center justify-center mb-2 text-purple-400 group-hover:scale-105 transition-transform">
                                     <i class="fa-solid fa-user-group text-xl"></i>
                                 </div>
                                 <span class="font-mono text-xs font-bold text-white">Upload Sibling</span>
@@ -979,7 +1016,7 @@
     </main>
 
     <!-- Gallery Lightbox Modal -->
-    <div id="gallery-lightbox" class="fixed inset-0 z-[60] bg-[#020617]/95 backdrop-blur-xl hidden flex-col items-center justify-center opacity-0 transition-opacity duration-300">
+    <div id="gallery-lightbox" class="fixed inset-0 z-[60] bg-[#090909]/95 backdrop-blur-xl hidden flex-col items-center justify-center opacity-0 transition-opacity duration-300">
         <button onclick="closeGallery()" class="absolute top-6 right-6 text-white bg-white/10 hover:bg-white/20 rounded-full w-12 h-12 flex items-center justify-center backdrop-blur-md transition shadow-lg border border-white/20">
             <i class="fa-solid fa-xmark text-2xl"></i>
         </button>
@@ -996,7 +1033,7 @@
     <!-- =========================================================
          MOBILE BOTTOM DOCK NAVIGATION (Visible below lg breakpoint)
          ========================================================= -->
-    <nav class="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-[#061229]/95 backdrop-blur-xl border-t border-sky-400/25 grid grid-cols-4 gap-1 px-2 py-1.5">
+    <nav class="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-[#090909]/95 backdrop-blur-xl border-t border-sky-400/25 grid grid-cols-4 gap-1 px-2 py-1.5">
         <button type="button" onclick="switchPage(1)" id="mob-dock-1" class="py-1.5 rounded-lg font-mono text-[10px] font-bold flex flex-col items-center gap-0.5 bg-blue-600 text-white">
             <span>01</span>
             <span>HOME</span>
@@ -1017,7 +1054,7 @@
 
     <!-- Toast Notification Banner -->
     <div id="toast-box" class="fixed bottom-16 lg:bottom-6 right-6 z-50 pointer-events-none transition-all duration-300 opacity-0 translate-y-3">
-        <div class="px-4 py-3 rounded-xl bg-[#061229] text-white border border-sky-400/40 shadow-2xl flex items-center gap-2.5 font-mono text-xs">
+        <div class="px-4 py-3 rounded-xl bg-[#090909] text-white border border-sky-400/40 shadow-2xl flex items-center gap-2.5 font-mono text-xs">
             <i class="fa-solid fa-circle-check text-emerald-400"></i>
             <span id="toast-text">Portfolio Ready</span>
         </div>
