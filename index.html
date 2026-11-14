@@ -345,13 +345,57 @@
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background: rgba(56, 189, 248, 0.7);
         }
+    
+        /* Keep every achievement photo centered in the viewport. */
+        #gallery-lightbox:not(.hidden) { display: flex; align-items: center; justify-content: center; }
+        #gallery-main-img {
+            position: absolute; left: 50%; top: 50%;
+            transform: translate(-50%, -50%);
+            width: auto; height: auto;
+            max-width: calc(100vw - 144px); max-height: calc(100dvh - 160px);
+            object-fit: contain;
+        }
+        #gallery-lightbox > div:first-of-type {
+            position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none;
+            display: flex; align-items: center; justify-content: center;
+        }
+        #gallery-lightbox button { z-index: 2; }
+        #gallery-lightbox > button { z-index: 3; }
+        #gallery-counter { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); margin: 0; white-space: nowrap; }
+        @media (max-width: 640px) {
+            #gallery-main-img { max-width: calc(100vw - 100px); max-height: calc(100dvh - 144px); }
+            #gallery-lightbox > div:first-of-type button { padding: 12px; font-size: 24px; }
+        }
+
+    
+        /* Page 4 fits its allotted viewport without an internal scrollbar. */
+        #page-4 { overflow: hidden; min-height: 0; }
+        #family-content { display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: 12px; overflow: hidden; }
+        #family-cards { height: 100%; overflow: hidden; }
+        #family-cards > .bento-card { min-height: 0; padding: 12px; overflow: hidden; gap: 6px; }
+        #family-cards .photo-dropzone { flex: 1; min-height: 0; aspect-ratio: auto; margin: 0; }
+        #family-cards .photo-dropzone img { position: absolute; inset: 0; }
+        #family-cards h3 { margin-top: 0; font-size: clamp(11px, 1.7vw, 18px); }
+        #family-cards .font-mono { margin-bottom: 0; }
+        #friends-card { overflow: hidden; }
+        @media (max-width: 640px) {
+            #page-4 > div:first-child { flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+            #page-4 > div:first-child h2 { font-size: 22px; }
+            #family-cards { gap: 6px; }
+            #family-cards > .bento-card { padding: 6px; }
+            #family-cards .font-mono span { padding: 4px; font-size: 10px; }
+            #family-cards .photo-dropzone .w-12 { width: 28px; height: 28px; }
+            #family-cards .photo-dropzone .font-mono { font-size: 9px; }
+            #friends-card { padding: 10px 12px; }
+        }
+
     </style>
 </head>
 <body class="selection:bg-blue-500 selection:text-white flex flex-col h-screen overflow-hidden text-slate-100 orientation-landscape">
 
-    <!-- Dynamic Blurred Portrait Photo Background Layer (Permanently set to 599f7112-391d-4abb-80af-c29c81f59ecb.jpg) -->
+    <!-- Dynamic Blurred Portrait Photo Background Layer (Permanently set to https://framerusercontent.com/images/jbHAGbEhaO5Q853i3lHwVojx8.jpg?width=2752&amp;height=1536&amp;kb=203) -->
     <div id="dynamic-photo-bg" class="fixed inset-0 pointer-events-none overflow-hidden transition-opacity duration-700 opacity-100" style="z-index: 0;">
-        <img id="bg-blur-img" src="599f7112-391d-4abb-80af-c29c81f59ecb.jpg" alt="" class="w-full h-full object-cover" style="filter: blur(14px) brightness(0.92) saturate(1.15); transform: scale(1.06);">
+        <img id="bg-blur-img" src="https://framerusercontent.com/images/jbHAGbEhaO5Q853i3lHwVojx8.jpg?width=2752&amp;height=1536&amp;kb=203" alt="" class="w-full h-full object-cover" style="filter: blur(14px) brightness(0.92) saturate(1.15); transform: scale(1.06);">
         <div class="absolute inset-0" style="background: radial-gradient(circle at center, rgba(7, 20, 44, 0.45) 0%, rgba(5, 14, 33, 0.75) 100%);"></div>
     </div>
 
@@ -433,7 +477,7 @@
                     </div>
                 </div>
 
-                <!-- MIDDLE AREA: Widescreen Landscape Photo Area As-Is (52vh, Permanently Linked to 599f7112-391d-4abb-80af-c29c81f59ecb.jpg) -->
+                <!-- MIDDLE AREA: Widescreen Landscape Photo Area As-Is (52vh, Permanently Linked to https://framerusercontent.com/images/jbHAGbEhaO5Q853i3lHwVojx8.jpg?width=2752&amp;height=1536&amp;kb=203) -->
                 <div class="w-full flex-none flex items-center justify-center overflow-hidden anim-stagger-2" style="height: 52vh;">
                     <div id="dropzone-profile"
                          class="photo-dropzone hero-photo-frame float-slow relative rounded-3xl overflow-hidden bg-white transition-all flex items-center justify-center shadow-2xl"
@@ -441,7 +485,7 @@
 
                         <!-- Permanent Studio Portrait -->
                         <img id="profile-img"
-                             src="599f7112-391d-4abb-80af-c29c81f59ecb.jpg"
+                             src="https://framerusercontent.com/images/jbHAGbEhaO5Q853i3lHwVojx8.jpg?width=2752&amp;height=1536&amp;kb=203"
                              alt="Jovari A. Lucas"
                              class="w-full h-full object-cover object-center">
                     </div>
@@ -719,7 +763,7 @@
                     <div class="flex-1 min-h-0 flex flex-col gap-3 overflow-y-auto custom-scrollbar pr-1">
                         
                         <!-- 1. With Honors - Grade 12 (2 Pics) -->
-                        <div class="sub-item-card px-4 py-3 rounded-2xl flex items-center gap-3.5 cursor-pointer group" onclick="openGallery(['1bec868c-57b7-4bab-aaf1-1d5fe1207376.jpg', 'f6b32bbf-a74c-4e14-ab3c-a541c025dfc4.jpg'])">
+                        <div class="sub-item-card px-4 py-3 rounded-2xl flex items-center gap-3.5 cursor-pointer group" onclick="openGallery(['https://framerusercontent.com/images/H0vf3e5Rsuplj8m39nZcgUz7nec.jpg?width=3072&amp;height=4080&amp;kb=1451', 'https://framerusercontent.com/images/dqYgzadYUOpQB4DHeoFJFDtKk.jpg?width=4080&amp;height=3072&amp;kb=566'])">
                             <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center shrink-0">
                                 <i class="fa-solid fa-medal text-base"></i>
                             </div>
@@ -731,13 +775,13 @@
                             </div>
                             <!-- Permanent Thumbnails -->
                             <div class="flex items-center -space-x-3 shrink-0 ml-2">
-                                <img src="1bec868c-57b7-4bab-aaf1-1d5fe1207376.jpg" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform">
-                                <img src="f6b32bbf-a74c-4e14-ab3c-a541c025dfc4.jpg" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform delay-75">
+                                <img src="https://framerusercontent.com/images/H0vf3e5Rsuplj8m39nZcgUz7nec.jpg?width=3072&amp;height=4080&amp;kb=1451" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform">
+                                <img src="https://framerusercontent.com/images/dqYgzadYUOpQB4DHeoFJFDtKk.jpg?width=4080&amp;height=3072&amp;kb=566" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform delay-75">
                             </div>
                         </div>
 
                         <!-- 2. Loyalty Awardee (2 Pics) -->
-                        <div class="sub-item-card px-4 py-3 rounded-2xl flex items-center gap-3.5 cursor-pointer group" onclick="openGallery(['eded4bef-d3cc-45d6-a0c4-226aee9beafc.jpg', 'f91d1765-cd4e-4ea7-80a8-ab5a8caa55f3.jpg'])">
+                        <div class="sub-item-card px-4 py-3 rounded-2xl flex items-center gap-3.5 cursor-pointer group" onclick="openGallery(['https://framerusercontent.com/images/BLYo7hCsm0XqibmtZzaR2DmVysM.jpg?width=3072&amp;height=4080&amp;kb=1516', 'https://framerusercontent.com/images/DQNqo1tUtl8xzdshpwtamfyLdxo.jpg?width=3072&amp;height=4080&amp;kb=1461'])">
                             <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center shrink-0">
                                 <i class="fa-solid fa-award text-base"></i>
                             </div>
@@ -748,13 +792,13 @@
                                 </h4>
                             </div>
                             <div class="flex items-center -space-x-3 shrink-0 ml-2">
-                                <img src="eded4bef-d3cc-45d6-a0c4-226aee9beafc.jpg" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform">
-                                <img src="f91d1765-cd4e-4ea7-80a8-ab5a8caa55f3.jpg" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform delay-75">
+                                <img src="https://framerusercontent.com/images/BLYo7hCsm0XqibmtZzaR2DmVysM.jpg?width=3072&amp;height=4080&amp;kb=1516" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform">
+                                <img src="https://framerusercontent.com/images/DQNqo1tUtl8xzdshpwtamfyLdxo.jpg?width=3072&amp;height=4080&amp;kb=1461" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform delay-75">
                             </div>
                         </div>
 
                         <!-- 3. Performing Arts Awardee (4 Pics) -->
-                        <div class="sub-item-card px-4 py-3 rounded-2xl flex items-center gap-3.5 cursor-pointer group" onclick="openGallery(['cc331e6d-660b-422b-bd3a-8f2ad025583c.jpg', 'f7ac2774-ffb0-427d-926b-fce10c77b3a7.jpg', 'c76e7860-2ca0-4b71-9794-fb949fc5b61d.jpg', '2e2a06ba-5cbd-4551-8bbd-e0525da1dc76.jpg'])">
+                        <div class="sub-item-card px-4 py-3 rounded-2xl flex items-center gap-3.5 cursor-pointer group" onclick="openGallery(['https://framerusercontent.com/images/v1guaQIxD3jYcgc0pfB3pZLFqA4.jpg?width=3072&amp;height=4080&amp;kb=539', 'https://framerusercontent.com/images/WQShTH5B4hdHUFp8UipoLLUfEQ.jpg?width=4080&amp;height=3072&amp;kb=583', 'https://framerusercontent.com/images/werUevB2IZ0k8g8C7BNOWrc3Sg.jpg?width=3072&amp;height=4080&amp;kb=1335', 'https://framerusercontent.com/images/jkYJ7zpC2RwAxojCRY07X8Un1jM.jpg?width=3072&amp;height=4080&amp;kb=1460'])">
                             <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-300 flex items-center justify-center shrink-0">
                                 <i class="fa-solid fa-music text-base"></i>
                             </div>
@@ -765,15 +809,15 @@
                                 </h4>
                             </div>
                             <div class="flex items-center -space-x-4 shrink-0 ml-2">
-                                <img src="cc331e6d-660b-422b-bd3a-8f2ad025583c.jpg" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform z-[4]">
-                                <img src="f7ac2774-ffb0-427d-926b-fce10c77b3a7.jpg" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform delay-[50ms] z-[3]">
-                                <img src="c76e7860-2ca0-4b71-9794-fb949fc5b61d.jpg" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform delay-75 z-[2]">
-                                <img src="2e2a06ba-5cbd-4551-8bbd-e0525da1dc76.jpg" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform delay-100 z-[1]">
+                                <img src="https://framerusercontent.com/images/v1guaQIxD3jYcgc0pfB3pZLFqA4.jpg?width=3072&amp;height=4080&amp;kb=539" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform z-[4]">
+                                <img src="https://framerusercontent.com/images/WQShTH5B4hdHUFp8UipoLLUfEQ.jpg?width=4080&amp;height=3072&amp;kb=583" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform delay-[50ms] z-[3]">
+                                <img src="https://framerusercontent.com/images/werUevB2IZ0k8g8C7BNOWrc3Sg.jpg?width=3072&amp;height=4080&amp;kb=1335" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform delay-75 z-[2]">
+                                <img src="https://framerusercontent.com/images/jkYJ7zpC2RwAxojCRY07X8Un1jM.jpg?width=3072&amp;height=4080&amp;kb=1460" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform delay-100 z-[1]">
                             </div>
                         </div>
 
                         <!-- 4. Adversity Quotient (1 Pic) -->
-                        <div class="sub-item-card px-4 py-3 rounded-2xl flex items-center gap-3.5 cursor-pointer group" onclick="openGallery(['1d90ba69-c489-42f2-b7f9-258a070c14b0.jpg'])">
+                        <div class="sub-item-card px-4 py-3 rounded-2xl flex items-center gap-3.5 cursor-pointer group" onclick="openGallery(['https://framerusercontent.com/images/Rghx1j8iTGO8UbtuEpyBzxyeD2s.jpg?width=4080&amp;height=3072&amp;kb=607'])">
                             <div class="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-300 flex items-center justify-center shrink-0">
                                 <i class="fa-solid fa-certificate text-base"></i>
                             </div>
@@ -784,12 +828,12 @@
                                 </h4>
                             </div>
                             <div class="flex items-center shrink-0 ml-2">
-                                <img src="1d90ba69-c489-42f2-b7f9-258a070c14b0.jpg" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform">
+                                <img src="https://framerusercontent.com/images/Rghx1j8iTGO8UbtuEpyBzxyeD2s.jpg?width=4080&amp;height=3072&amp;kb=607" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform">
                             </div>
                         </div>
                         
                         <!-- 5. Work Immersion (1 Pic) -->
-                        <div class="sub-item-card px-4 py-3 rounded-2xl flex items-center gap-3.5 cursor-pointer group" onclick="openGallery(['IMG_9180.jpg'])">
+                        <div class="sub-item-card px-4 py-3 rounded-2xl flex items-center gap-3.5 cursor-pointer group" onclick="openGallery(['https://framerusercontent.com/images/IWeg1XxTBN45WK1xkIuzyWcU54.jpg?width=5184&amp;height=3456&amp;kb=6277'])">
                             <div class="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-300 flex items-center justify-center shrink-0">
                                 <i class="fa-solid fa-briefcase text-base"></i>
                             </div>
@@ -800,7 +844,7 @@
                                 </h4>
                             </div>
                             <div class="flex items-center shrink-0 ml-2">
-                                <img src="IMG_9180.jpg" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform">
+                                <img src="https://framerusercontent.com/images/IWeg1XxTBN45WK1xkIuzyWcU54.jpg?width=5184&amp;height=3456&amp;kb=6277" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-[#0A1B3D] shadow-md group-hover:-translate-y-1 transition-transform">
                             </div>
                         </div>
 
@@ -835,11 +879,11 @@
                 </div>
             </div>
 
-            <!-- Scrollable Content Area for Family & Friends -->
-            <div class="flex-1 min-h-0 overflow-y-auto custom-scrollbar pr-2 pb-6 anim-stagger-2">
+            <!-- Viewport-fitted Family & Friends -->
+            <div id="family-content" class="flex-1 min-h-0 anim-stagger-2">
                 
                 <!-- FAMILY ROW (Parents & Sibling) -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+                <div id="family-cards" class="grid grid-cols-3 gap-3 min-h-0">
                     <!-- MOTHER'S PORTRAIT CARD -->
                     <div class="bento-card p-4 sm:p-5 flex flex-col justify-between border-t border-t-rose-400/45">
                         <div class="flex items-center justify-between font-mono text-xs shrink-0 mb-2.5">
@@ -914,34 +958,21 @@
                     </div>
                 </div>
 
-                <!-- FRIENDS ROW -->
-                <div class="flex items-center gap-3 mb-4">
-                    <h3 class="font-display text-2xl font-bold text-white">Friends</h3>
-                    <div class="flex-1 h-px bg-sky-400/20"></div>
-                </div>
-                
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                    <!-- Generate 6 Friend Cards -->
-                    <script>
-                        for(let i=1; i<=6; i++) {
-                            document.write(`
-                            <div class="bento-card p-3 flex flex-col justify-between border-t border-t-emerald-400/30">
-                                <input type="file" id="upload-friend-${i}" accept="image/*" class="hidden" onchange="handlePhotoFile(event, 'friend-img-${i}', 'friend-placeholder-${i}', 'netsec_photo_friend_${i}', 400)">
-                                <div id="dropzone-friend-${i}"
-                                     onclick="document.getElementById('upload-friend-${i}').click()"
-                                     class="photo-dropzone w-full aspect-square relative rounded-xl overflow-hidden bg-[#091A3A]/90 border border-sky-400/15 hover:border-emerald-400/50 cursor-pointer transition-all my-1 flex items-center justify-center group shadow-lg">
-                                    <img id="friend-img-${i}" src="" class="hidden w-full h-full object-cover">
-                                    <div id="friend-placeholder-${i}" class="w-full h-full flex flex-col items-center justify-center text-center select-none">
-                                        <i class="fa-solid fa-camera-retro text-emerald-400/50 text-xl group-hover:scale-110 transition-transform mb-1"></i>
-                                        <span class="font-mono text-[9px] font-bold text-emerald-100/60 uppercase">Friend ${i}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            `);
-                        }
-                    </script>
-                </div>
 
+                <!-- Single Friends Gallery Box -->
+                <div id="friends-card" class="bento-card p-4 border-t border-t-emerald-400/30">
+                    <button type="button" onclick="openFriendsGallery()" class="w-full flex items-center gap-4 text-left" aria-label="Open friends photo gallery">
+                        <span class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center shrink-0"><i class="fa-solid fa-user-group text-xl"></i></span>
+                        <span class="flex-1 min-w-0"><span class="font-display text-xl font-bold text-white block">Friends</span><span class="text-sky-200 text-xs">Click to view pictures</span></span>
+                        <i class="fa-solid fa-chevron-right text-sky-300"></i>
+                    </button>
+                    <label class="inline-block mt-2 text-xs text-emerald-300 cursor-pointer">Add or replace pictures
+                        <input type="file" id="friends-gallery-upload" accept="image/*" multiple class="hidden" onchange="uploadFriendsGallery(event)">
+                    </label>
+                    <div hidden id="friends-photo-storage">
+                        <img id="friend-img-1" src="" alt="Friend 1"><div id="friend-placeholder-1"></div><img id="friend-img-2" src="" alt="Friend 2"><div id="friend-placeholder-2"></div><img id="friend-img-3" src="" alt="Friend 3"><div id="friend-placeholder-3"></div><img id="friend-img-4" src="" alt="Friend 4"><div id="friend-placeholder-4"></div><img id="friend-img-5" src="" alt="Friend 5"><div id="friend-placeholder-5"></div><img id="friend-img-6" src="" alt="Friend 6"><div id="friend-placeholder-6"></div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -1059,16 +1090,19 @@
             }
         }
 
-        // Keyboard Left/Right Arrow Navigation
+        // Arrow keys navigate photos while the gallery is open, otherwise pages.
         document.addEventListener('keydown', function(e) {
-            const tag = document.activeElement ? document.activeElement.tagName : '';
-            if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
-
-            if (e.key === 'ArrowRight') {
-                stepPage(1);
-            } else if (e.key === 'ArrowLeft') {
-                stepPage(-1);
+            const lightbox = document.getElementById('gallery-lightbox');
+            if (lightbox && !lightbox.classList.contains('hidden')) {
+                if (e.key === 'ArrowRight') { e.preventDefault(); nextGalleryImage(); }
+                else if (e.key === 'ArrowLeft') { e.preventDefault(); prevGalleryImage(); }
+                else if (e.key === 'Escape') { e.preventDefault(); closeGallery(); }
+                return;
             }
+            const active = document.activeElement;
+            if (active && (active.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(active.tagName))) return;
+            if (e.key === 'ArrowRight') { e.preventDefault(); stepPage(1); }
+            else if (e.key === 'ArrowLeft') { e.preventDefault(); stepPage(-1); }
         });
 
         /* 2. INTERACTIVE CYBER NETWORK TOPOLOGY & LIVE DATA PACKET ANIMATION */
@@ -1273,13 +1307,14 @@
             updateGalleryImage();
             const lightbox = document.getElementById('gallery-lightbox');
             lightbox.classList.remove('hidden');
+            lightbox.classList.add('flex');
             setTimeout(() => lightbox.classList.remove('opacity-0'), 10);
         }
 
         function closeGallery() {
             const lightbox = document.getElementById('gallery-lightbox');
             lightbox.classList.add('opacity-0');
-            setTimeout(() => lightbox.classList.add('hidden'), 300);
+            setTimeout(() => { lightbox.classList.add('hidden'); lightbox.classList.remove('flex'); }, 300);
         }
 
         function prevGalleryImage() {
@@ -1299,6 +1334,28 @@
             const counter = document.getElementById('gallery-counter');
             img.src = currentGalleryImages[currentGalleryIndex];
             counter.textContent = `PICTURE ${currentGalleryIndex + 1} OF ${currentGalleryCount}`;
+        }
+
+
+        function openFriendsGallery() {
+            const pictures = [];
+            for (let i = 1; i <= 6; i++) {
+                const img = document.getElementById('friend-img-' + i);
+                if (img && img.getAttribute('src')) pictures.push(img.src);
+            }
+            if (pictures.length) openGallery(pictures);
+            else document.getElementById('friends-gallery-upload').click();
+        }
+        function uploadFriendsGallery(event) {
+            const files = Array.from(event.target.files || []).slice(0, 6);
+            files.forEach((file, index) => {
+                const i = index + 1;
+                processImageFile(file, 'friend-img-' + i, 'friend-placeholder-' + i,
+                    'netsec_photo_friend_' + i, 1600, function() {
+                        showToast('Friends picture saved');
+                    });
+            });
+            event.target.value = '';
         }
 
         function loadSavedPhotos() {
