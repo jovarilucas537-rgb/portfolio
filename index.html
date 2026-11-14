@@ -424,6 +424,88 @@
             #personal-detail-boxes li { margin-top: 6px; padding-bottom: 4px; }
         }
 
+    
+        /* Homepage-only metallic gold finishing. */
+        #page-1 { position: relative; isolation: isolate; }
+        #page-1::before {
+            content: ""; position: absolute; inset: 8px; z-index: -1; pointer-events: none;
+            border: 1px solid rgba(212,175,55,.22); border-radius: 24px;
+            background: radial-gradient(ellipse at 50% 45%,rgba(212,175,55,.09),transparent 65%);
+        }
+        #page-1::after {
+            content: ""; position: absolute; inset: 8px; border-radius: 24px; pointer-events: none;
+            background:
+                linear-gradient(#E6C768,#E6C768) left top/64px 2px no-repeat,
+                linear-gradient(#E6C768,#E6C768) left top/2px 40px no-repeat,
+                linear-gradient(#E6C768,#E6C768) right bottom/64px 2px no-repeat,
+                linear-gradient(#E6C768,#E6C768) right bottom/2px 40px no-repeat;
+        }
+        #page-1 .home-gold-layout { padding: 16px 24px; gap: clamp(10px,2vh,22px); }
+        .home-gold-eyebrow { display: flex; align-items: center; justify-content: center; gap: 14px; font-family: 'JetBrains Mono',monospace; font-size: 10px; letter-spacing: .28em; color: #D4AF37; margin-bottom: 6px; }
+        .home-gold-eyebrow span { width: 48px; height: 1px; background: linear-gradient(90deg,transparent,#D4AF37); }
+        .home-gold-eyebrow span:last-child { transform: rotate(180deg); }
+        #page-1 #hero-student-name { background-image: linear-gradient(115deg,#A27B25 0%,#F6E5A2 25%,#CBA445 50%,#FFF4CC 72%,#B18A30 100%) !important; text-shadow: none; filter: drop-shadow(0 4px 18px rgba(212,175,55,.15)); }
+        #page-1 .home-program { gap: 10px; }
+        #page-1 .home-program p { color: #E8E1CD !important; }
+        #page-1 .home-program > div { border: 1px solid rgba(212,175,55,.65); background: linear-gradient(135deg,#211D12,#0D0C09) !important; color: #E6CB80 !important; }
+        #page-1 .home-program .rounded-full.w-2 { background: #E1BD54 !important; box-shadow: 0 0 10px rgba(212,175,55,.65); }
+        #page-1 .home-photo-stage { overflow: visible; }
+        #page-1 #dropzone-profile { border: 2px solid #D4AF37 !important; box-shadow: 0 0 0 5px #080808,0 0 0 6px rgba(212,175,55,.4),0 18px 50px rgba(0,0,0,.65),0 0 35px rgba(212,175,55,.14); animation: none; }
+        #page-1 #dropzone-profile::after { content: ""; position: absolute; inset: 7px; border: 1px solid rgba(255,230,156,.45); border-radius: 17px; pointer-events: none; }
+        .home-gold-signoff { display: flex; align-items: center; justify-content: center; gap: 18px; color: #CDBB83; font-family: 'JetBrains Mono',monospace; font-size: 10px; letter-spacing: .2em; flex-shrink: 0; }
+        .gold-separator { width: 4px; height: 4px; background: #D4AF37; transform: rotate(45deg); }
+        @media (max-width: 640px) {
+            #page-1 .home-gold-layout { padding: 14px 18px; }
+            #page-1 #hero-student-name { font-size: clamp(28px,8vw,54px) !important; }
+            .home-gold-eyebrow { font-size: 8px; letter-spacing: .18em; }
+            .home-gold-eyebrow span { width: 24px; }
+            .home-gold-signoff { font-size: 8px; gap: 9px; letter-spacing: .1em; }
+            #page-1 .home-program p { font-size: 11px !important; }
+            #page-1 .home-program > div { font-size: 9px; }
+        }
+
+    
+        /* Slow gold atmosphere remains behind the homepage content. */
+        #page-1 .gold-atmosphere { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; border-radius: 24px; }
+        #page-1 .home-gold-layout { position: relative; z-index: 1; }
+        #page-1::after { z-index: 2; }
+        .gold-smoke { position: absolute; width: 65%; height: 80%; opacity: .5; filter: blur(42px); will-change: transform; }
+        .gold-smoke-left {
+            left: -28%; top: 10%; transform-origin: 35% 65%;
+            background: radial-gradient(ellipse at 45% 65%,rgba(212,175,55,.33),transparent 48%),radial-gradient(ellipse at 60% 30%,rgba(245,218,130,.16),transparent 55%);
+            animation: goldSmokeLeft 18s ease-in-out infinite alternate;
+        }
+        .gold-smoke-right {
+            right: -26%; top: 2%; transform-origin: 70% 60%;
+            background: radial-gradient(ellipse at 45% 65%,rgba(196,150,37,.3),transparent 50%),radial-gradient(ellipse at 30% 35%,rgba(249,224,151,.14),transparent 55%);
+            animation: goldSmokeRight 22s ease-in-out infinite alternate;
+        }
+        .gold-smoke-floor {
+            left: 5%; bottom: -55%; width: 90%; height: 90%;
+            background: radial-gradient(ellipse at center,rgba(212,175,55,.28),transparent 62%);
+            animation: goldFloorDrift 15s ease-in-out infinite alternate;
+        }
+        .gold-dust-field { position: absolute; inset: 0; }
+        .gold-dust-mote { position: absolute; left: var(--x); top: var(--y); width: var(--size); height: var(--size); border-radius: 50%; background: #F3D780; box-shadow: 0 0 7px rgba(230,194,90,.65); opacity: 0; animation: goldDustRise var(--duration) linear var(--delay) infinite; }
+        @keyframes goldSmokeLeft { from { transform: translate(-3%,12%) rotate(-12deg) scale(.9); opacity: .35; } to { transform: translate(22%,-8%) rotate(16deg) scale(1.18); opacity: .65; } }
+        @keyframes goldSmokeRight { from { transform: translate(9%,-5%) rotate(12deg) scale(1); opacity: .3; } to { transform: translate(-18%,14%) rotate(-18deg) scale(1.2); opacity: .6; } }
+        @keyframes goldFloorDrift { from { transform: translateX(-9%) scaleX(.9); opacity: .3; } to { transform: translateX(9%) scaleX(1.15); opacity: .6; } }
+        @keyframes goldDustRise {
+            0% { transform: translate3d(0,40px,0); opacity: 0; }
+            20% { opacity: .65; }
+            70% { opacity: .45; }
+            100% { transform: translate3d(var(--drift),-140px,0); opacity: 0; }
+        }
+        #page-1:not(.active) .gold-smoke, #page-1:not(.active) .gold-dust-mote { animation-play-state: paused; }
+        @media (max-width: 640px) {
+            .gold-smoke { filter: blur(28px); }
+            .gold-dust-mote:nth-child(n+21) { display: none; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .gold-smoke { animation: none !important; opacity: .25; }
+            .gold-dust-mote { animation: none !important; opacity: .3; }
+        }
+
     </style>
 </head>
 <body class="selection:bg-blue-500 selection:text-white flex flex-col h-screen overflow-hidden text-slate-100 orientation-landscape">
@@ -491,17 +573,24 @@
              PAGE 1: 01 // HOME (100VH FIT — MONUMENTAL NAME ABOVE, LANDSCAPE PHOTO BELOW)
              ===================================================== -->
         <section id="page-1" class="page-view active">
-            <div class="w-full h-full flex flex-col justify-center items-center text-center gap-6 pb-2">
+            <div class="gold-atmosphere" aria-hidden="true">
+                <div class="gold-smoke gold-smoke-left"></div>
+                <div class="gold-smoke gold-smoke-right"></div>
+                <div class="gold-smoke gold-smoke-floor"></div>
+                <div class="gold-dust-field"><span class="gold-dust-mote" style="--x:11%;--y:9%;--size:3px;--duration:9s;--delay:0s;--drift:24px"></span><span class="gold-dust-mote" style="--x:48%;--y:32%;--size:2px;--duration:10s;--delay:-1.7s;--drift:-32px"></span><span class="gold-dust-mote" style="--x:85%;--y:55%;--size:1px;--duration:11s;--delay:-3.4s;--drift:24px"></span><span class="gold-dust-mote" style="--x:22%;--y:78%;--size:2px;--duration:12s;--delay:-5.1s;--drift:-32px"></span><span class="gold-dust-mote" style="--x:59%;--y:1%;--size:1px;--duration:13s;--delay:-6.8s;--drift:24px"></span><span class="gold-dust-mote" style="--x:96%;--y:24%;--size:2px;--duration:14s;--delay:-8.5s;--drift:-32px"></span><span class="gold-dust-mote" style="--x:33%;--y:47%;--size:1px;--duration:15s;--delay:-10.2s;--drift:24px"></span><span class="gold-dust-mote" style="--x:70%;--y:70%;--size:3px;--duration:16s;--delay:-11.9s;--drift:-32px"></span><span class="gold-dust-mote" style="--x:7%;--y:93%;--size:1px;--duration:17s;--delay:-13.6s;--drift:24px"></span><span class="gold-dust-mote" style="--x:44%;--y:16%;--size:2px;--duration:18s;--delay:-15.299999999999999s;--drift:-32px"></span><span class="gold-dust-mote" style="--x:81%;--y:39%;--size:1px;--duration:19s;--delay:-17s;--drift:24px"></span><span class="gold-dust-mote" style="--x:18%;--y:62%;--size:2px;--duration:9s;--delay:-18.7s;--drift:-32px"></span><span class="gold-dust-mote" style="--x:55%;--y:85%;--size:1px;--duration:10s;--delay:-20.4s;--drift:24px"></span><span class="gold-dust-mote" style="--x:92%;--y:8%;--size:2px;--duration:11s;--delay:-22.099999999999998s;--drift:-32px"></span><span class="gold-dust-mote" style="--x:29%;--y:31%;--size:3px;--duration:12s;--delay:-23.8s;--drift:24px"></span><span class="gold-dust-mote" style="--x:66%;--y:54%;--size:2px;--duration:13s;--delay:-25.5s;--drift:-32px"></span><span class="gold-dust-mote" style="--x:3%;--y:77%;--size:1px;--duration:14s;--delay:-27.2s;--drift:24px"></span><span class="gold-dust-mote" style="--x:40%;--y:0%;--size:2px;--duration:15s;--delay:-28.9s;--drift:-32px"></span><span class="gold-dust-mote" style="--x:77%;--y:23%;--size:1px;--duration:16s;--delay:-30.599999999999998s;--drift:24px"></span><span class="gold-dust-mote" style="--x:14%;--y:46%;--size:2px;--duration:17s;--delay:-32.3s;--drift:-32px"></span><span class="gold-dust-mote" style="--x:51%;--y:69%;--size:1px;--duration:18s;--delay:-34s;--drift:24px"></span><span class="gold-dust-mote" style="--x:88%;--y:92%;--size:3px;--duration:19s;--delay:-35.699999999999996s;--drift:-32px"></span><span class="gold-dust-mote" style="--x:25%;--y:15%;--size:1px;--duration:9s;--delay:-37.4s;--drift:24px"></span><span class="gold-dust-mote" style="--x:62%;--y:38%;--size:2px;--duration:10s;--delay:-39.1s;--drift:-32px"></span><span class="gold-dust-mote" style="--x:99%;--y:61%;--size:1px;--duration:11s;--delay:-40.8s;--drift:24px"></span><span class="gold-dust-mote" style="--x:36%;--y:84%;--size:2px;--duration:12s;--delay:-42.5s;--drift:-32px"></span><span class="gold-dust-mote" style="--x:73%;--y:7%;--size:1px;--duration:13s;--delay:-44.199999999999996s;--drift:24px"></span><span class="gold-dust-mote" style="--x:10%;--y:30%;--size:2px;--duration:14s;--delay:-45.9s;--drift:-32px"></span><span class="gold-dust-mote" style="--x:47%;--y:53%;--size:3px;--duration:15s;--delay:-47.6s;--drift:24px"></span><span class="gold-dust-mote" style="--x:84%;--y:76%;--size:2px;--duration:16s;--delay:-49.3s;--drift:-32px"></span><span class="gold-dust-mote" style="--x:21%;--y:99%;--size:1px;--duration:17s;--delay:-51s;--drift:24px"></span><span class="gold-dust-mote" style="--x:58%;--y:22%;--size:2px;--duration:18s;--delay:-52.699999999999996s;--drift:-32px"></span><span class="gold-dust-mote" style="--x:95%;--y:45%;--size:1px;--duration:19s;--delay:-54.4s;--drift:24px"></span><span class="gold-dust-mote" style="--x:32%;--y:68%;--size:2px;--duration:9s;--delay:-56.1s;--drift:-32px"></span><span class="gold-dust-mote" style="--x:69%;--y:91%;--size:1px;--duration:10s;--delay:-57.8s;--drift:24px"></span><span class="gold-dust-mote" style="--x:6%;--y:14%;--size:3px;--duration:11s;--delay:-59.5s;--drift:-32px"></span></div>
+            </div>
+            <div class="home-gold-layout w-full h-full flex flex-col justify-center items-center text-center gap-6 pb-2">
 
                 <!-- TOP AREA: Monumental Full Name & Program Above the Photo -->
                 <div class="w-full flex flex-col items-center shrink-0 anim-stagger-1" style="gap: clamp(0.2rem, 0.55vh, 0.5rem);">
-                    <!-- Student Full Name (Monumental Scale with Metallic Shimmer, No Blue Border) -->
+                    <div class="home-gold-eyebrow"><span></span> PERSONAL PORTFOLIO <span></span></div>
+                    <!-- Gold signature headline -->
                     <h1 id="hero-student-name" class="hero-name-shimmer font-display font-bold tracking-tight leading-none select-none" style="font-size: clamp(4.4rem, 11.2vh, 9.5rem);">
                         JOVARI A. LUCAS
                     </h1>
 
                     <!-- Degree Program & Major Pill -->
-                    <div class="flex flex-wrap items-center justify-center gap-2.5 mt-0.5">
+                    <div class="home-program flex flex-wrap items-center justify-center gap-2.5 mt-0.5">
                         <p class="font-display font-semibold uppercase tracking-[0.14em] text-blue-100 leading-snug" style="font-size: clamp(0.85rem, 1.65vh, 1.25rem); text-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);">
                             Bachelor of Science in Information Technology
                         </p>
@@ -513,7 +602,7 @@
                 </div>
 
                 <!-- MIDDLE AREA: Widescreen Landscape Photo Area As-Is (52vh, Permanently Linked to https://framerusercontent.com/images/jbHAGbEhaO5Q853i3lHwVojx8.jpg?width=2752&amp;height=1536&amp;kb=203) -->
-                <div class="w-full flex-none flex items-center justify-center overflow-hidden anim-stagger-2" style="height: 52vh;">
+                <div class="home-photo-stage w-full flex-none flex items-center justify-center anim-stagger-2" style="height: 48vh;">
                     <div id="dropzone-profile"
                          class="photo-dropzone hero-photo-frame float-slow relative rounded-3xl overflow-hidden bg-white transition-all flex items-center justify-center shadow-2xl"
                          style="height: 100%; border: none; background-color: #FFFFFF;">
@@ -525,6 +614,7 @@
                              class="w-full h-full object-cover object-center">
                     </div>
                 </div>
+                <div class="home-gold-signoff"><span>NETWORK</span><span class="gold-separator"></span><span>SECURITY</span><span class="gold-separator"></span><span>INNOVATION</span></div>
             </div>
         </section>
 
