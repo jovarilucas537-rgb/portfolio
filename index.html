@@ -507,6 +507,58 @@
         }
 
     </style>
+<style>
+#family-cards #mother-photo-card { overflow-y:auto; }
+#family-cards #mother-photo-card .photo-dropzone { flex:1 0 100px; cursor:default; }
+#mother-photo-card .mother-dedication { flex-shrink:0; margin:0; font-size:clamp(10px,1.15vw,14px); line-height:1.5; }
+</style>
+<style>
+#family-cards #father-photo-card { overflow-y:auto; }
+#family-cards #father-photo-card .photo-dropzone { flex:1 0 100px; cursor:default; }
+#father-photo-card .father-dedication { flex-shrink:0; margin:0; font-size:clamp(10px,1.15vw,14px); line-height:1.5; }
+</style>
+<style>
+#family-cards #sibling-photo-card { overflow-y:auto; }
+#family-cards #sibling-photo-card .photo-dropzone { flex:1 0 100px; cursor:default; }
+#sibling-photo-card .sibling-dedication { flex-shrink:0; margin:0; font-size:clamp(10px,1.15vw,14px); line-height:1.5; }
+</style>
+<style>
+#family-content { grid-template-rows:minmax(0, 1.6fr) minmax(0, 1fr); gap:12px; }
+#family-cards { height:auto; }
+#family-cards #mother-photo-card, #family-cards #father-photo-card, #family-cards #sibling-photo-card { display:flex; flex-direction:column; justify-content:flex-start; min-height:0; overflow-y:auto; }
+#family-cards #mother-photo-card .photo-dropzone, #family-cards #father-photo-card .photo-dropzone, #family-cards #sibling-photo-card .photo-dropzone { flex:1 0 80px; min-height:80px; }
+#family-cards .mother-dedication, #family-cards .father-dedication, #family-cards .sibling-dedication { font-size:clamp(10px,1vw,13px); line-height:1.45; }
+#friends-card { display:flex; flex-direction:column; gap:8px; min-height:0; padding:12px; }
+#friends-card h3 { margin:0; flex-shrink:0; font-size:18px; }
+#friends-photo-grid { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:10px; flex:1; min-height:0; }
+#friends-photo-grid button { display:flex; align-items:center; justify-content:center; padding:0; min-width:0; min-height:0; overflow:hidden; border:1px solid #B89636; border-radius:10px; background:#090909; cursor:pointer; }
+#friends-photo-grid img { display:block; width:100%; height:100%; min-height:0; object-fit:contain; }
+#friends-photo-grid button:hover, #friends-photo-grid button:focus-visible { outline:2px solid #F0D277; outline-offset:1px; }
+#friends-card .friends-dedication { margin:0; font-size:clamp(11px,1.1vw,14px); line-height:1.5; flex-shrink:0; }
+@media(max-width:640px) {
+ #page-4 { overflow-y:auto; }
+ #family-content { overflow:visible; flex:none; display:flex; flex-direction:column; }
+ #family-cards { overflow:visible; flex-shrink:0; }
+ #family-cards #mother-photo-card, #family-cards #father-photo-card, #family-cards #sibling-photo-card { overflow:visible; }
+ #family-cards #mother-photo-card .photo-dropzone, #family-cards #father-photo-card .photo-dropzone, #family-cards #sibling-photo-card .photo-dropzone { flex:none; height:140px; }
+ #friends-card { flex-shrink:0; overflow:visible; }
+ #friends-photo-grid { flex:none; grid-template-columns:repeat(3,minmax(0,1fr)); grid-auto-rows:115px; gap:6px; }
+}
+</style>
+
+<style>
+/* Home portrait frame matches the uploaded photo proportions. */
+#page-1 #dropzone-profile {
+    aspect-ratio: 1792 / 2400;
+    width: auto;
+    max-width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+}
+#page-1 #profile-img {
+    object-fit: contain;
+}
+</style>
 </head>
 <body class="selection:bg-blue-500 selection:text-white flex flex-col h-screen overflow-hidden text-slate-100 orientation-landscape">
 
@@ -602,14 +654,14 @@
                 </div>
 
                 <!-- MIDDLE AREA: Widescreen Landscape Photo Area As-Is (52vh, Permanently Linked to https://framerusercontent.com/images/jbHAGbEhaO5Q853i3lHwVojx8.jpg?width=2752&amp;height=1536&amp;kb=203) -->
-                <div class="home-photo-stage w-full flex-none flex items-center justify-center anim-stagger-2" style="height: 48vh;">
+                <div class="home-photo-stage w-full flex-none flex items-center justify-center anim-stagger-2" style="height: 54vh;">
                     <div id="dropzone-profile"
                          class="photo-dropzone hero-photo-frame float-slow relative rounded-3xl overflow-hidden bg-white transition-all flex items-center justify-center shadow-2xl"
                          style="height: 100%; border: none; background-color: #FFFFFF;">
 
                         <!-- Permanent Studio Portrait -->
                         <img id="profile-img"
-                             src="https://framerusercontent.com/images/jbHAGbEhaO5Q853i3lHwVojx8.jpg?width=2752&amp;height=1536&amp;kb=203"
+                             src="https://framerusercontent.com/images/iXDagnv7mlLA937qRKKYWSnLG0.jpg?width=1792&height=2400&kb=83"
                              alt="Jovari A. Lucas"
                              class="w-full h-full object-cover object-center">
                     </div>
@@ -681,6 +733,7 @@
                             <li class="flex justify-between items-center border-b border-sky-400/10 pb-2"><span class="text-sky-400 font-bold">Weight:</span> <span>72kg</span></li>
                             <li class="flex justify-between items-center border-b border-sky-400/10 pb-2"><span class="text-sky-400 font-bold">Nationality:</span> <span>Filipino</span></li>
                             <li class="flex justify-between items-center"><span class="text-sky-400 font-bold">Ethnicity:</span> <span>Ibaloi</span></li>
+                            <li class="flex justify-between items-center border-b border-sky-400/10 pb-2"><span class="text-sky-400 font-bold">Civil Status:</span> <span>Single</span></li>
                             <li class="program-detail"><span class="text-sky-400 font-bold">Program:</span> <span>Bachelor of Science in Information Technology</span></li>
                         </ul>
                     </div>
@@ -1011,94 +1064,54 @@
                 
                 <!-- FAMILY ROW (Parents & Sibling) -->
                 <div id="family-cards" class="grid grid-cols-3 gap-3 min-h-0">
-                    <!-- MOTHER'S PORTRAIT CARD -->
-                    <div class="bento-card p-4 sm:p-5 flex flex-col justify-between border-t border-t-rose-400/45">
-                        <div class="flex items-center justify-between font-mono text-xs shrink-0 mb-2.5">
-                            <span class="px-3 py-1 rounded-lg bg-rose-500/15 text-rose-300 border border-rose-400/20 font-bold">
-                                Mother
-                            </span>
+                    <!-- Permanent mother photo -->
+                    <div id="mother-photo-card" class="bento-card p-4 sm:p-5 flex flex-col justify-between border-t border-t-rose-400/45 text-left">
+                        <div class="font-mono text-xs shrink-0 mb-2.5"><span class="px-3 py-1 rounded-lg bg-rose-500/15 text-rose-300 border border-rose-400/20 font-bold">Mother</span></div>
+                        <div class="photo-dropzone w-full relative rounded-2xl overflow-hidden flex items-center justify-center">
+                            <img id="mother-img" src="https://framerusercontent.com/images/GeWzj4wzgC7gEYJgN21RLACoT0.jpg?width=2390&height=1792&kb=167" alt="A treasured photo with Mom" class="w-full h-full object-contain" style="object-fit:contain;object-position:center top">
                         </div>
-                        <div id="dropzone-mother"
-                             onclick="document.getElementById('upload-mother').click()"
-                             ondragover="handleDragOver(event, 'dropzone-mother')"
-                             ondragleave="handleDragLeave(event, 'dropzone-mother')"
-                             ondrop="handleDrop(event, 'dropzone-mother', 'mother-img', 'mother-placeholder', 'netsec_photo_mother', 600)"
-                             class="photo-dropzone w-full aspect-square relative rounded-2xl overflow-hidden bg-[#090909]/90 border border-sky-400/15 hover:border-rose-400/50 cursor-pointer transition-all my-1 flex items-center justify-center group shadow-xl">
-                            <img id="mother-img" src="" alt="Photo of My Mother" class="hidden w-full h-full object-cover">
-                            <div id="mother-placeholder" class="w-full h-full flex flex-col items-center justify-center p-4 text-center select-none">
-                                <div class="w-12 h-12 rounded-2xl bg-[#090909] border border-rose-400/20 shadow-sm flex items-center justify-center mb-2 text-rose-400 group-hover:scale-105 transition-transform">
-                                    <i class="fa-solid fa-heart text-xl"></i>
-                                </div>
-                                <span class="font-mono text-xs font-bold text-white">Upload Mother</span>
-                            </div>
-                        </div>
-                        <h3 class="font-display text-lg font-bold text-white text-center mt-3">My Inspiration</h3>
+                        <h3 class="font-display text-lg font-bold text-white text-center mt-3">Mother</h3>
+                        <p class="mother-dedication text-center text-sky-200">Through every mistake, every rough season, and every quiet victory—thank you for your unconditional love, Mom.</p>
                     </div>
 
-                    <!-- FATHER'S PORTRAIT CARD -->
-                    <div class="bento-card p-4 sm:p-5 flex flex-col justify-between border-t border-t-sky-400/45">
+                    <!-- Permanent Father photo -->
+                    <div id="father-photo-card" class="bento-card p-4 sm:p-5 flex flex-col justify-between border-t border-t-sky-400/45">
                         <div class="flex items-center justify-between font-mono text-xs shrink-0 mb-2.5">
-                            <span class="px-3 py-1 rounded-lg bg-blue-500/15 text-sky-300 border border-sky-400/20 font-bold">
-                                Father
-                            </span>
+                            <span class="px-3 py-1 rounded-lg bg-blue-500/15 text-sky-300 border border-sky-400/20 font-bold">Father</span>
                         </div>
-                        <div id="dropzone-father"
-                             onclick="document.getElementById('upload-father').click()"
-                             ondragover="handleDragOver(event, 'dropzone-father')"
-                             ondragleave="handleDragLeave(event, 'dropzone-father')"
-                             ondrop="handleDrop(event, 'dropzone-father', 'father-img', 'father-placeholder', 'netsec_photo_father', 600)"
-                             class="photo-dropzone w-full aspect-square relative rounded-2xl overflow-hidden bg-[#090909]/90 border border-sky-400/15 hover:border-sky-400/50 cursor-pointer transition-all my-1 flex items-center justify-center group shadow-xl">
-                            <img id="father-img" src="" alt="Photo of My Father" class="hidden w-full h-full object-cover">
-                            <div id="father-placeholder" class="w-full h-full flex flex-col items-center justify-center p-4 text-center select-none">
-                                <div class="w-12 h-12 rounded-2xl bg-[#090909] border border-sky-400/20 shadow-sm flex items-center justify-center mb-2 text-sky-400 group-hover:scale-105 transition-transform">
-                                    <i class="fa-solid fa-shield-heart text-xl"></i>
-                                </div>
-                                <span class="font-mono text-xs font-bold text-white">Upload Father</span>
-                            </div>
+                        <div class="photo-dropzone w-full relative rounded-2xl overflow-hidden flex items-center justify-center">
+                            <img id="father-img" src="https://framerusercontent.com/images/w7DNEOozkrH7ocOdc9724fGRt9c.jpg?width=1792&height=2400&kb=210" alt="Photo of my father" class="w-full h-full object-contain" style="object-fit:contain;object-position:center">
                         </div>
-                        <h3 class="font-display text-lg font-bold text-white text-center mt-3">My Foundation</h3>
+                        <h3 class="font-display text-lg font-bold text-white text-center mt-3">Father</h3>
+                        <p class="father-dedication text-center text-sky-200">Thank you for the quiet sacrifices, the steady support, the discipline that shaped me, and always having my back, even when I didn’t realize I needed it.</p>
                     </div>
 
-                    <!-- SIBLING'S PORTRAIT CARD -->
-                    <div class="bento-card p-4 sm:p-5 flex flex-col justify-between border-t border-t-purple-400/45">
+                    <!-- Permanent Sibling photo -->
+                    <div id="sibling-photo-card" class="bento-card p-4 sm:p-5 flex flex-col justify-between border-t border-t-purple-400/45">
                         <div class="flex items-center justify-between font-mono text-xs shrink-0 mb-2.5">
-                            <span class="px-3 py-1 rounded-lg bg-purple-500/15 text-purple-300 border border-purple-400/20 font-bold">
-                                Sibling
-                            </span>
-                            <input type="file" id="upload-sibling" accept="image/*" class="hidden" onchange="handlePhotoFile(event, 'sibling-img', 'sibling-placeholder', 'netsec_photo_sibling', 600)">
+                            <span class="px-3 py-1 rounded-lg bg-purple-500/15 text-purple-300 border border-purple-400/20 font-bold">Sibling</span>
                         </div>
-                        <div id="dropzone-sibling"
-                             onclick="document.getElementById('upload-sibling').click()"
-                             ondragover="handleDragOver(event, 'dropzone-sibling')"
-                             ondragleave="handleDragLeave(event, 'dropzone-sibling')"
-                             ondrop="handleDrop(event, 'dropzone-sibling', 'sibling-img', 'sibling-placeholder', 'netsec_photo_sibling', 600)"
-                             class="photo-dropzone w-full aspect-square relative rounded-2xl overflow-hidden bg-[#090909]/90 border border-sky-400/15 hover:border-purple-400/50 cursor-pointer transition-all my-1 flex items-center justify-center group shadow-xl">
-                            <img id="sibling-img" src="" class="hidden w-full h-full object-cover">
-                            <div id="sibling-placeholder" class="w-full h-full flex flex-col items-center justify-center p-4 text-center select-none">
-                                <div class="w-12 h-12 rounded-2xl bg-[#090909] border border-purple-400/20 shadow-sm flex items-center justify-center mb-2 text-purple-400 group-hover:scale-105 transition-transform">
-                                    <i class="fa-solid fa-user-group text-xl"></i>
-                                </div>
-                                <span class="font-mono text-xs font-bold text-white">Upload Sibling</span>
-                            </div>
+                        <div class="photo-dropzone w-full relative rounded-2xl overflow-hidden flex items-center justify-center">
+                            <img id="sibling-img" src="https://framerusercontent.com/images/rSl7XYsS6NvmDGEplqoRPLuQw.jpg?width=1792&height=2390&kb=128" alt="Photo of my sibling" class="w-full h-full object-contain" style="object-fit:contain;object-position:center">
                         </div>
-                        <h3 class="font-display text-lg font-bold text-white text-center mt-3">Family Bond</h3>
+                        <h3 class="font-display text-lg font-bold text-white text-center mt-3">Sibling</h3>
+                        <p class="sibling-dedication text-center text-sky-200">No matter how much time passes or how busy life gets, you’re always my constant.</p>
                     </div>
                 </div>
 
 
-                <!-- Single Friends Gallery Box -->
+                <!-- Permanent Friends gallery -->
                 <div id="friends-card" class="bento-card p-4 border-t border-t-emerald-400/30">
-                    <button type="button" onclick="openFriendsGallery()" class="w-full flex items-center gap-4 text-left" aria-label="Open friends photo gallery">
-                        <span class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center shrink-0"><i class="fa-solid fa-user-group text-xl"></i></span>
-                        <span class="flex-1 min-w-0"><span class="font-display text-xl font-bold text-white block">Friends</span><span class="text-sky-200 text-xs">Click to view pictures</span></span>
-                        <i class="fa-solid fa-chevron-right text-sky-300"></i>
-                    </button>
-                    <label class="inline-block mt-2 text-xs text-emerald-300 cursor-pointer">Add or replace pictures
-                        <input type="file" id="friends-gallery-upload" accept="image/*" multiple class="hidden" onchange="uploadFriendsGallery(event)">
-                    </label>
-                    <div hidden id="friends-photo-storage">
-                        <img id="friend-img-1" src="" alt="Friend 1"><div id="friend-placeholder-1"></div><img id="friend-img-2" src="" alt="Friend 2"><div id="friend-placeholder-2"></div><img id="friend-img-3" src="" alt="Friend 3"><div id="friend-placeholder-3"></div><img id="friend-img-4" src="" alt="Friend 4"><div id="friend-placeholder-4"></div><img id="friend-img-5" src="" alt="Friend 5"><div id="friend-placeholder-5"></div><img id="friend-img-6" src="" alt="Friend 6"><div id="friend-placeholder-6"></div>
+                    <h3 class="font-display text-xl font-bold text-white">Friends</h3>
+                    <div id="friends-photo-grid">
+                        <button type="button" onclick="openFriendsPhoto(0)" aria-label="View friends photo 1"><img id="friend-img-1" src="https://framerusercontent.com/images/Vq2OxK9uiI3ZTjocvX8N0EZ0t0.jpg?width=2048&height=1536&kb=128" alt="Friends memory 1" loading="lazy"></button>
+                        <button type="button" onclick="openFriendsPhoto(1)" aria-label="View friends photo 2"><img id="friend-img-2" src="https://framerusercontent.com/images/aRFSSnkbWnqYJEjAKcnsqtSNTV0.jpg?width=3072&height=4096&kb=872" alt="Friends memory 2" loading="lazy"></button>
+                        <button type="button" onclick="openFriendsPhoto(2)" aria-label="View friends photo 3"><img id="friend-img-3" src="https://framerusercontent.com/images/C5TUIMDzSyp0RHfQac1VpUhZY8.jpg?width=1125&height=844&kb=101" alt="Friends memory 3" loading="lazy"></button>
+                        <button type="button" onclick="openFriendsPhoto(3)" aria-label="View friends photo 4"><img id="friend-img-4" src="https://framerusercontent.com/images/QGgUYbaykNyIOzFHnGwp6qEsbY.jpg?width=3024&height=4032&kb=413" alt="Friends memory 4" loading="lazy"></button>
+                        <button type="button" onclick="openFriendsPhoto(4)" aria-label="View friends photo 5"><img id="friend-img-5" src="https://framerusercontent.com/images/Glswt6egNOX3yey7M81l2Juw0.jpg?width=1536&height=2048&kb=187" alt="Friends memory 5" loading="lazy"></button>
+                        <button type="button" onclick="openFriendsPhoto(5)" aria-label="View friends photo 6"><img id="friend-img-6" src="https://framerusercontent.com/images/paGkPKfbB5OrLTovCp7F1kJpmLo.jpg?width=2048&height=1536&kb=159" alt="Friends memory 6" loading="lazy"></button>
                     </div>
+                    <p class="friends-dedication text-center text-sky-200">Thank you for the late night talks, the effortless laughs, and always showing up when it counts.</p>
                 </div>
             </div>
         </section>
@@ -1464,6 +1477,12 @@
         }
 
 
+        function openFriendsPhoto(index) {
+            openFriendsGallery();
+            currentGalleryIndex = index;
+            updateGalleryImage();
+        }
+
         function openFriendsGallery() {
             const pictures = [];
             for (let i = 1; i <= 6; i++) {
@@ -1488,15 +1507,12 @@
         function loadSavedPhotos() {
             // General Photos
             const slots = [
-                { img: 'mother-img', ph: 'mother-placeholder', key: 'netsec_photo_mother' },
-                { img: 'father-img', ph: 'father-placeholder', key: 'netsec_photo_father' },
-                { img: 'sibling-img', ph: 'sibling-placeholder', key: 'netsec_photo_sibling' },
             ];
             
             // Edus
             for(let i=1; i<=5; i++) slots.push({ img: `edu-logo-${i}`, ph: null, key: `netsec_edu_logo_${i}` });
             // Friends
-            for(let i=1; i<=6; i++) slots.push({ img: `friend-img-${i}`, ph: `friend-placeholder-${i}`, key: `netsec_photo_friend_${i}` });
+
 
             slots.forEach(s => {
                 try {
@@ -1559,5 +1575,6 @@
             switchPage(1);
         };
     </script>
+
 </body>
 </html>
