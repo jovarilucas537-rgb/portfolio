@@ -559,7 +559,122 @@
     object-fit: contain;
 }
 </style>
-</head>
+<style>
+#page-2,#page-4{overflow-y:auto}
+#page-2>.flex-1{flex:none}
+#personal-detail-boxes{flex:none;grid-template-columns:2fr 1fr;align-items:start}
+#personal-detail-boxes>:first-child{grid-row:span 2}
+#personal-detail-boxes>.bento-card{justify-content:flex-start;overflow:visible}
+#personal-detail-boxes>:last-child{grid-column:auto}
+#personal-detail-boxes>:first-child ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px;margin:0}
+#personal-detail-boxes>:first-child li{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:5px;margin:0;padding:12px 0;border-bottom:1px solid rgba(212,175,55,.16);line-height:1.5;overflow-wrap:anywhere}
+#family-content{display:flex;flex-direction:column;flex:none;overflow:visible;gap:16px}
+#family-cards{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch;gap:16px}
+#family-cards>.bento-card,#friends-card{overflow:visible;gap:12px;cursor:pointer}
+#family-cards>.bento-card:focus-visible,#friends-card:focus-visible{outline:2px solid #F0D277;outline-offset:4px}
+#family-cards .photo-dropzone{flex:none!important;height:220px;min-height:0!important}
+#family-cards p,#friends-card .friends-dedication{font-size:14px;line-height:1.65;margin:0}
+#friends-photo-grid{display:grid;flex:none;grid-template-columns:1fr;grid-auto-rows:auto;width:100%;max-width:640px;margin:0 auto}
+#friends-photo-grid button{height:280px}
+#friends-card h3{text-align:center}
+#gallery-lightbox>.relative{flex:1;min-height:0;max-height:70vh}
+#gallery-main-img{max-height:65vh}
+#gallery-caption{color:#F0D277;text-align:center;max-width:720px;padding:0 24px;margin:16px 0 8px;line-height:1.6;max-height:18vh;overflow-y:auto}
+#gallery-counter{margin-top:8px;margin-bottom:16px}
+@media(max-width:900px){#personal-detail-boxes{grid-template-columns:repeat(2,minmax(0,1fr))}#personal-detail-boxes>:first-child{grid-column:1/-1;grid-row:auto}#family-cards{grid-template-columns:1fr}#family-cards .photo-dropzone{height:280px}}
+@media(max-width:640px){#page-2>:first-child,#page-4>:first-child{flex-wrap:wrap}#personal-detail-boxes{grid-template-columns:1fr}#personal-detail-boxes>:first-child ul{grid-template-columns:1fr}#friends-photo-grid button{height:220px}}
+</style>
+<style id="compact-pages">
+/* Desktop: use the available screen height; captions keep their natural height. */
+@media(min-width:1024px) and (min-height:650px){
+ #page-2,#page-4{overflow:hidden}
+ #page-2 > :first-child,#page-4 > :first-child{margin-bottom:10px}
+ #page-2 > :first-child h2{font-size:38px}
+ #page-2 > .flex-1{flex:1;min-height:0;gap:10px}
+ #page-2 > .flex-1 > :first-child > .bento-card{padding:10px 12px}
+ #page-2 > .flex-1 > :first-child span{font-size:12px;line-height:1.35}
+ #page-2 > .flex-1 > :first-child span:last-child{font-size:14px}
+ #page-2 > .flex-1 > :last-child{gap:10px}
+ #page-2 > .flex-1 > :last-child > a{padding:9px 12px}
+ #personal-detail-boxes{flex:1;min-height:0;grid-template-columns:minmax(0,2.4fr) minmax(0,1fr);grid-template-rows:1fr 1fr;gap:10px;align-items:stretch}
+ #personal-detail-boxes > .bento-card{padding:12px 16px;min-height:0;justify-content:flex-start}
+ #personal-detail-boxes > :first-child{grid-column:1;grid-row:1 / 3}
+ #personal-detail-boxes > :nth-child(2),#personal-detail-boxes > :last-child{grid-column:2;grid-row:auto}
+ #personal-detail-boxes h3{font-size:20px;margin-bottom:8px;flex-shrink:0}
+ #personal-detail-boxes ul,#personal-detail-boxes p{font-size:13px;line-height:1.4}
+ #personal-detail-boxes > :first-child ul{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 14px;align-content:start}
+ #personal-detail-boxes > :first-child li,#personal-detail-boxes > :first-child li.program-detail{gap:3px;margin:0;padding:7px 0;border-top:0;font-size:12px;line-height:1.35}
+ #personal-detail-boxes > :first-child li span:last-child{font-size:13px}
+ #personal-detail-boxes > :last-child li{font-size:13px;margin-top:5px;gap:8px}
+ #family-content{display:grid;flex:1;min-height:0;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:minmax(0,1fr);gap:12px;align-items:stretch;overflow:hidden}
+ #family-cards{display:contents}
+ #family-cards > .bento-card,#family-content #friends-card{display:flex;flex-direction:column;min-height:0;height:100%;padding:14px;gap:10px;overflow:hidden;justify-content:flex-start}
+ #family-cards > .bento-card > :first-child{min-height:28px;margin:0;flex-shrink:0}
+ #family-cards .photo-dropzone{flex:1 1 0!important;height:auto!important;min-height:0!important;max-height:none}
+ #family-cards .photo-dropzone img{height:100%;width:100%;object-fit:contain}
+ #family-cards h3{font-size:17px;line-height:1.3;margin:0;flex-shrink:0}
+ #family-cards p,#family-content #friends-card .friends-dedication{font-size:13px;line-height:1.55;flex:0 0 auto;margin:0;overflow:visible}
+ #family-content #friends-card > h3{order:0;min-height:28px;font-size:17px;line-height:28px}
+ #friends-photo-grid{order:1;flex:1 1 0;min-height:0;grid-template-columns:1fr;grid-template-rows:minmax(0,1fr);max-width:none;margin:0}
+ #friends-photo-grid button{height:100%;min-height:0}
+ #friends-photo-grid img{height:100%;width:100%;object-fit:contain}
+ #friends-card .friends-dedication{order:2}
+}
+/* Small or short screens prioritize complete, readable captions over clipping. */
+@media(max-width:1023px),(max-height:649px){
+ #page-2,#page-4{overflow-y:auto}
+ #family-content{overflow:visible}
+ #family-cards > .bento-card,#family-content #friends-card{height:auto;overflow:visible}
+ #family-cards p,#family-content #friends-card .friends-dedication{display:block;position:static;flex-shrink:0;font-size:14px;line-height:1.6;margin-top:8px;overflow:visible}
+}
+</style>
+<style id="portrait-details-caption-refinements">
+@media(min-width:1024px) and (min-height:650px){
+ #personal-detail-boxes > :first-child ul{
+   flex:1;min-height:0;grid-template-rows:repeat(6,minmax(0,1fr));
+   align-content:stretch;align-items:stretch;column-gap:18px;
+ }
+ #personal-detail-boxes > :first-child li,
+ #personal-detail-boxes > :first-child li.program-detail{
+   justify-content:center;padding:6px 0;font-size:13px;line-height:1.35;
+ }
+ #personal-detail-boxes > :first-child li span:last-child{font-size:14px}
+}
+#mother-photo-card .photo-dropzone{align-items:center;justify-content:center}
+#mother-photo-card #mother-img{object-position:center center!important;object-fit:contain}
+#gallery-lightbox{box-sizing:border-box;padding:64px 24px 24px;gap:16px}
+#gallery-lightbox > div:first-of-type{
+ position:relative;inset:auto;width:100%;height:auto;max-width:1100px;
+ max-height:none;flex:1 1 0;min-height:0;padding:0 56px;
+ display:flex;align-items:center;justify-content:center;
+}
+#gallery-main-img{
+ position:static;left:auto;top:auto;transform:none;
+ width:auto;height:auto;max-width:100%;
+ max-height:calc(100dvh - 270px);object-fit:contain;flex-shrink:1;
+}
+#gallery-caption{
+ position:static;flex:0 0 auto;box-sizing:border-box;
+ width:100%;max-width:860px;margin:0;padding:0 20px;
+ color:#F0D277;font-size:clamp(18px,1.6vw,23px);line-height:1.6;
+ font-weight:500;text-align:center;max-height:25dvh;overflow-y:auto;
+}
+#gallery-counter{
+ position:static;left:auto;bottom:auto;transform:none;
+ flex:0 0 auto;margin:0;font-size:12px;
+}
+#page-1 .home-photo-stage{height:60vh!important}
+@media(max-width:640px){
+ #gallery-lightbox{padding:64px 12px 20px;gap:12px}
+ #gallery-lightbox > div:first-of-type{padding:0 40px}
+ #gallery-main-img{max-width:100%;max-height:calc(100dvh - 290px)}
+ #gallery-caption{font-size:18px;line-height:1.5;padding:0 10px;max-height:30dvh}
+ #page-1 .home-photo-stage{height:57vh!important}
+}
+@media(max-height:700px){
+ #page-1 .home-photo-stage{height:55vh!important}
+}
+</style></head>
 <body class="selection:bg-blue-500 selection:text-white flex flex-col h-screen overflow-hidden text-slate-100 orientation-landscape">
 
     <!-- Dynamic Blurred Portrait Photo Background Layer (Permanently set to https://framerusercontent.com/images/jbHAGbEhaO5Q853i3lHwVojx8.jpg?width=2752&amp;height=1536&amp;kb=203) -->
@@ -735,7 +850,18 @@
                             <li class="flex justify-between items-center"><span class="text-sky-400 font-bold">Ethnicity:</span> <span>Ibaloi</span></li>
                             <li class="flex justify-between items-center border-b border-sky-400/10 pb-2"><span class="text-sky-400 font-bold">Civil Status:</span> <span>Single</span></li>
                             <li class="program-detail"><span class="text-sky-400 font-bold">Program:</span> <span>Bachelor of Science in Information Technology</span></li>
-                        </ul>
+                        <li><span class="text-sky-400 font-bold">Blood Type:</span><span>O+</span></li>
+<li><span class="text-sky-400 font-bold">Eye Color:</span><span>Brown</span></li>
+<li><span class="text-sky-400 font-bold">Hair Color:</span><span>Black</span></li>
+<li><span class="text-sky-400 font-bold">Religion:</span><span>Anglican</span></li>
+<li><span class="text-sky-400 font-bold">Body Type:</span><span>Bulky</span></li>
+<li><span class="text-sky-400 font-bold">Waist Size:</span><span>31</span></li>
+<li><span class="text-sky-400 font-bold">Shoe Size:</span><span>9</span></li>
+<li><span class="text-sky-400 font-bold">Skin Color:</span><span>Brown</span></li>
+<li><span class="text-sky-400 font-bold">Favorite Color:</span><span>Black and Blue</span></li>
+<li><span class="text-sky-400 font-bold">Favorite Food:</span><span>Watwat, Pinikpikan, and Eggs</span></li>
+<li><span class="text-sky-400 font-bold">Favorite Movie:</span><span>1992</span></li>
+<li><span class="text-sky-400 font-bold">Sports:</span><span>Basketball, Boxing and Arm-Wrestling</span></li></ul>
                     </div>
 
                     <!-- Full Address -->
@@ -1104,12 +1230,7 @@
                 <div id="friends-card" class="bento-card p-4 border-t border-t-emerald-400/30">
                     <h3 class="font-display text-xl font-bold text-white">Friends</h3>
                     <div id="friends-photo-grid">
-                        <button type="button" onclick="openFriendsPhoto(0)" aria-label="View friends photo 1"><img id="friend-img-1" src="https://framerusercontent.com/images/Vq2OxK9uiI3ZTjocvX8N0EZ0t0.jpg?width=2048&height=1536&kb=128" alt="Friends memory 1" loading="lazy"></button>
-                        <button type="button" onclick="openFriendsPhoto(1)" aria-label="View friends photo 2"><img id="friend-img-2" src="https://framerusercontent.com/images/aRFSSnkbWnqYJEjAKcnsqtSNTV0.jpg?width=3072&height=4096&kb=872" alt="Friends memory 2" loading="lazy"></button>
-                        <button type="button" onclick="openFriendsPhoto(2)" aria-label="View friends photo 3"><img id="friend-img-3" src="https://framerusercontent.com/images/C5TUIMDzSyp0RHfQac1VpUhZY8.jpg?width=1125&height=844&kb=101" alt="Friends memory 3" loading="lazy"></button>
-                        <button type="button" onclick="openFriendsPhoto(3)" aria-label="View friends photo 4"><img id="friend-img-4" src="https://framerusercontent.com/images/QGgUYbaykNyIOzFHnGwp6qEsbY.jpg?width=3024&height=4032&kb=413" alt="Friends memory 4" loading="lazy"></button>
-                        <button type="button" onclick="openFriendsPhoto(4)" aria-label="View friends photo 5"><img id="friend-img-5" src="https://framerusercontent.com/images/Glswt6egNOX3yey7M81l2Juw0.jpg?width=1536&height=2048&kb=187" alt="Friends memory 5" loading="lazy"></button>
-                        <button type="button" onclick="openFriendsPhoto(5)" aria-label="View friends photo 6"><img id="friend-img-6" src="https://framerusercontent.com/images/paGkPKfbB5OrLTovCp7F1kJpmLo.jpg?width=2048&height=1536&kb=159" alt="Friends memory 6" loading="lazy"></button>
+                        <button type="button" onclick="openFriendsPhoto(0)" aria-label="View friends photo 6"><img id="friend-img-6" src="https://framerusercontent.com/images/paGkPKfbB5OrLTovCp7F1kJpmLo.jpg?width=2048&height=1536&kb=159" alt="Friends memory 6" loading="lazy"></button>
                     </div>
                     <p class="friends-dedication text-center text-sky-200">Thank you for the late night talks, the effortless laughs, and always showing up when it counts.</p>
                 </div>
@@ -1130,7 +1251,7 @@
             
             <button onclick="nextGalleryImage()" class="absolute right-4 md:right-8 text-white hover:text-sky-300 text-4xl p-4 transition-transform hover:scale-110 drop-shadow-2xl"><i class="fa-solid fa-chevron-right"></i></button>
         </div>
-        <div id="gallery-counter" class="text-sky-300 font-mono mt-6 tracking-widest text-sm bg-blue-900/50 px-4 py-1.5 rounded-full border border-sky-400/30"></div>
+        <p id="gallery-caption" hidden></p><div id="gallery-counter" class="text-sky-300 font-mono mt-6 tracking-widest text-sm bg-blue-900/50 px-4 py-1.5 rounded-full border border-sky-400/30"></div>
     </div>
 
     <!-- =========================================================
@@ -1576,5 +1697,19 @@
         };
     </script>
 
-</body>
+<script>
+(function(){
+var previousFocus=null;
+var lightbox=document.getElementById('gallery-lightbox');
+lightbox.setAttribute('role','dialog');lightbox.setAttribute('aria-modal','true');lightbox.setAttribute('aria-label','Photo viewer');
+lightbox.querySelector('button').setAttribute('aria-label','Close photo viewer');
+var originalOpen=window.openGallery,originalClose=window.closeGallery;
+window.openGallery=function(images){previousFocus=document.activeElement;var c=document.getElementById('gallery-caption');c.textContent='';c.hidden=true;originalOpen(images);lightbox.querySelector('button').focus();};
+window.closeGallery=function(){originalClose();if(previousFocus)previousFocus.focus();};
+function openCard(card){var img=card.querySelector('img'),p=card.querySelector('p');if(!img)return;window.openGallery([img.src]);document.getElementById('gallery-main-img').alt=img.alt;var c=document.getElementById('gallery-caption');c.textContent=p?p.textContent.trim():'';c.hidden=!c.textContent;}
+['mother-photo-card','father-photo-card','sibling-photo-card','friends-card'].forEach(function(id){var card=document.getElementById(id);card.tabIndex=0;card.setAttribute('role','button');card.setAttribute('aria-haspopup','dialog');card.setAttribute('aria-label','View '+card.querySelector('h3').textContent.trim()+' photo and caption');card.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();openCard(card);},true);card.addEventListener('keydown',function(e){if(e.target===card&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openCard(card);}});});
+document.addEventListener('keydown',function(e){if(lightbox.classList.contains('hidden'))return;if(e.key==='Escape')window.closeGallery();if(e.key==='Tab'){var buttons=Array.from(lightbox.querySelectorAll('button')),first=buttons[0],last=buttons[buttons.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
+lightbox.addEventListener('click',function(e){if(e.target===lightbox)window.closeGallery();});
+})();
+</script></body>
 </html>
